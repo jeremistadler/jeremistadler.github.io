@@ -1,0 +1,46 @@
+151680 C:\Program Files\Common Files\HP\Digital Imaging\Bin\HPQXMPP.dll
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Document_Acrobat.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Document_Email.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Document_HPDocViewer.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Document_PDF.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Document_PDFSearchable.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Document_Printer.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Document_ReadIris.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Document_TIFF.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Film_Photosmart.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\LargeFormatFilm_Photosmart.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Negative_Photosmart.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Picture_Email.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Picture_File.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Picture_Photoshop.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Picture_PhotoshopElements.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Picture_Photosmart.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Picture_Printer.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Slides_Photosmart.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Text_RTF.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Text_Word.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Text_WordPad.ico
+4406 C:\Program Files\Common Files\HP\Digital Imaging\Icons\Text_WordPerfect.ico
+0 C:\Program Files\Common Files\InstallShield\Driver\11\Intel 32\ID
+778240 C:\Program Files\Common Files\InstallShield\Driver\11\Intel 32\IDriver.exe
+778240 C:\Program Files\Common Files\InstallShield\Driver\11\Intel 32\IDriver2.exe
+69632 C:\Program Files\Common Files\InstallShield\Driver\11\Intel 32\IDriverT.exe
+200704 C:\Program Files\Common Files\InstallShield\Driver\11\Intel 32\iGdiCnv.dll
+274432 C:\Program Files\Common Files\InstallShield\Driver\11\Intel 32\IScrCnv.dll
+421888 C:\Program Files\Common Files\InstallShield\Driver\11\Intel 32\ISRT.dll
+184320 C:\Program Files\Common Files\InstallShield\Driver\11\Intel 32\IUserCnv.dll
+32768 C:\Program Files\Common Files\InstallShield\Driver\11\Intel 32\objpscnv.dll
+548963 C:\Program Files\Common Files\InstallShield\Driver\11\Intel 32\_ISRES1033.dll
+38081 C:\Program Files\Common Files\InstallShield\Professional\RunTime\iKernel.rgs
+121032 C:\Program Files\Common Files\InstallShield\Professional\RunTime\IsProBE.tlb
+32768 C:\Program Files\Common Files\InstallShield\Professional\RunTime\Objectps.dll
+69715 C:\Program Files\Common Files\InstallShield\Professional\RunTime\10\01\Intel32\ctor.dll
+5632 C:\Program Files\Common Files\InstallShield\Professional\RunTime\10\01\Intel32\DotNetInstaller.exe
+180356 C:\Program Files\Common Files\InstallShield\Professional\RunTime\10\01\Intel32\iGdi.dll
+733184 C:\Program Files\Common Files\InstallShield\Professional\RunTime\10\01\Intel32\iKernel.dll
+266240 C:\Program Files\Common Files\InstallShield\Professional\RunTime\10\01\Intel32\iscript.dll
+172032 C:\Program Files\Common Files\InstallShield\Professional\RunTime\10\01\Intel32\iuser.dll
+303236 C:\Program Files\Common Files\InstallShield\Professional\RunTime\10\01\Intel32\setup.dll
+69714 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\00\Intel32\ctor.dll
+5632 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\00\Intel32\DotNetInstaller.exe
+200836 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\00\Intel32\iGdi.dll

@@ -1,0 +1,34 @@
+753664 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\00\Intel32\iKernel.dll
+274432 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\00\Intel32\iscript.dll
+184320 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\00\Intel32\iuser.dll
+331908 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\00\Intel32\setup.dll
+69715 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\50\Intel32\ctor.dll
+5632 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\50\Intel32\DotNetInstaller.exe
+200836 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\50\Intel32\iGdi.dll
+757760 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\50\Intel32\iKernel.dll
+274432 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\50\Intel32\iscript.dll
+204800 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\50\Intel32\iuser.dll
+331908 C:\Program Files\Common Files\InstallShield\Professional\RunTime\11\50\Intel32\setup.dll
+254696 C:\Program Files\Common Files\Java\Java Update\jaucheck.exe
+239336 C:\Program Files\Common Files\Java\Java Update\jaureg.exe
+507624 C:\Program Files\Common Files\Java\Java Update\jucheck.exe
+254696 C:\Program Files\Common Files\Java\Java Update\jusched.exe
+1297 C:\Program Files\Common Files\Java\Java Update\task.xml
+1302 C:\Program Files\Common Files\Java\Java Update\task64.xml
+610304 C:\Program Files\Common Files\microsoft shared\DAO\dao360.dll
+791686 C:\Program Files\Common Files\microsoft shared\ink\Alphabet.xml
+27045 C:\Program Files\Common Files\microsoft shared\ink\Content.xml
+145920 C:\Program Files\Common Files\microsoft shared\ink\ConvertInkStore.exe
+903168 C:\Program Files\Common Files\microsoft shared\ink\FlickLearningWizard.exe
+46624 C:\Program Files\Common Files\microsoft shared\ink\hwrcommonlm.dat
+747280 C:\Program Files\Common Files\microsoft shared\ink\hwrenalm.dat
+815680 C:\Program Files\Common Files\microsoft shared\ink\hwrenclm.dat
+274944 C:\Program Files\Common Files\microsoft shared\ink\InkDiv.dll
+344576 C:\Program Files\Common Files\microsoft shared\ink\InkWatson.exe
+294400 C:\Program Files\Common Files\microsoft shared\ink\InputPersonalization.exe
+2592 C:\Program Files\Common Files\microsoft shared\ink\ipscat.xml
+2462 C:\Program Files\Common Files\microsoft shared\ink\ipschs.xml
+2436 C:\Program Files\Common Files\microsoft shared\ink\ipscht.xml
+2556 C:\Program Files\Common Files\microsoft shared\ink\ipscsy.xml
+2514 C:\Program Files\Common Files\microsoft shared\ink\ipsdan.xml
+2616 C:\Program Files\Common Files\microsoft shared\ink\ipsdeu.xml

@@ -1,0 +1,57 @@
+6406 C:\Program Files\Common Files\microsoft shared\Stationery\GreenBubbles.jpg
+2920 C:\Program Files\Common Files\microsoft shared\Stationery\grid_(cm).wmf
+7498 C:\Program Files\Common Files\microsoft shared\Stationery\grid_(inch).wmf
+235 C:\Program Files\Common Files\microsoft shared\Stationery\Hand Prints.htm
+4222 C:\Program Files\Common Files\microsoft shared\Stationery\HandPrints.jpg
+152300 C:\Program Files\Common Files\microsoft shared\Stationery\Memo.emf
+2209 C:\Program Files\Common Files\microsoft shared\Stationery\Monet.jpg
+4192 C:\Program Files\Common Files\microsoft shared\Stationery\Month_Calendar.emf
+26036 C:\Program Files\Common Files\microsoft shared\Stationery\Music.emf
+2950 C:\Program Files\Common Files\microsoft shared\Stationery\Notebook.jpg
+237 C:\Program Files\Common Files\microsoft shared\Stationery\Orange Circles.htm
+6381 C:\Program Files\Common Files\microsoft shared\Stationery\OrangeCircles.jpg
+232 C:\Program Files\Common Files\microsoft shared\Stationery\Peacock.htm
+5115 C:\Program Files\Common Files\microsoft shared\Stationery\Peacock.jpg
+3981 C:\Program Files\Common Files\microsoft shared\Stationery\Pine_Lumber.jpg
+5115 C:\Program Files\Common Files\microsoft shared\Stationery\Pretty_Peacock.jpg
+14049 C:\Program Files\Common Files\microsoft shared\Stationery\Psychedelic.jpg
+233 C:\Program Files\Common Files\microsoft shared\Stationery\Roses.htm
+1920 C:\Program Files\Common Files\microsoft shared\Stationery\Roses.jpg
+15776 C:\Program Files\Common Files\microsoft shared\Stationery\Sand_Paper.jpg
+37316 C:\Program Files\Common Files\microsoft shared\Stationery\Seyes.emf
+237 C:\Program Files\Common Files\microsoft shared\Stationery\Shades of Blue.htm
+4734 C:\Program Files\Common Files\microsoft shared\Stationery\ShadesOfBlue.jpg
+81292 C:\Program Files\Common Files\microsoft shared\Stationery\Shorthand.emf
+1990 C:\Program Files\Common Files\microsoft shared\Stationery\Small_News.jpg
+232 C:\Program Files\Common Files\microsoft shared\Stationery\Soft Blue.htm
+10569 C:\Program Files\Common Files\microsoft shared\Stationery\SoftBlue.jpg
+230 C:\Program Files\Common Files\microsoft shared\Stationery\Stars.htm
+7505 C:\Program Files\Common Files\microsoft shared\Stationery\Stars.jpg
+1864 C:\Program Files\Common Files\microsoft shared\Stationery\Stucco.gif
+3650 C:\Program Files\Common Files\microsoft shared\Stationery\Tanspecks.jpg
+4638 C:\Program Files\Common Files\microsoft shared\Stationery\Tiki.gif
+26720 C:\Program Files\Common Files\microsoft shared\Stationery\To_Do_List.emf
+3168 C:\Program Files\Common Files\microsoft shared\Stationery\White_Chocolate.jpg
+15063 C:\Program Files\Common Files\microsoft shared\Stationery\Wrinkled_Paper.gif
+641536 C:\Program Files\Common Files\microsoft shared\VC\msdia80.dll
+670032 C:\Program Files\Common Files\microsoft shared\VC\msdia90.dll
+766976 C:\Program Files\Common Files\microsoft shared\VGX\VGX.dll
+233352 C:\Program Files\Common Files\microsoft shared\Windows Live\HWDeviceLogin.dll
+97176 C:\Program Files\Common Files\microsoft shared\Windows Live\LogicalDevice.dll
+807832 C:\Program Files\Common Files\microsoft shared\Windows Live\msidcrl40.dll
+344448 C:\Program Files\Common Files\microsoft shared\Windows Live\SIGNINOPTIONS.EXE
+134144 C:\Program Files\Common Files\microsoft shared\Windows Live\SQMAPI.DLL
+403840 C:\Program Files\Common Files\microsoft shared\Windows Live\WindowsLiveLogin.dll
+300912 C:\Program Files\Common Files\microsoft shared\Windows Live\WLIDCREDPROV.DLL
+134528 C:\Program Files\Common Files\microsoft shared\Windows Live\WLIDNSP.DLL
+221056 C:\Program Files\Common Files\microsoft shared\Windows Live\WLIDPROV.DLL
+602528 C:\Program Files\Common Files\microsoft shared\Windows Live\WLIDRES.DLL
+183152 C:\Program Files\Common Files\microsoft shared\Windows Live\WLIDSVCM.EXE
+4657 C:\Program Files\Common Files\microsoft shared\Windows Live\WLive48x48.png
+1281 C:\Program Files\Common Files\microsoft shared\Windows Live\WLive_HC48x48.png
+47384 C:\Program Files\Common Files\microsoft shared\XNA\Framework\Shared\xnavisualizer.dll
+17176 C:\Program Files\Common Files\microsoft shared\XNA\Framework\Shared\XnaVisualizerPS.dll
+4968 C:\Program Files\Common Files\microsoft shared\XNA\Framework\v4.0\EULA.en-US.txt
+639448 C:\Program Files\Common Files\PC Tools\Shred\Shredder.dll
+13049 C:\Program Files\Common Files\PC Tools\Shred\ShredderLanguage.ini
+138712 C:\Program Files\Common Files\PC Tools\Shred\ShredderShellExtension.dll

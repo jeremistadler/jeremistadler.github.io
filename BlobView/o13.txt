@@ -1,0 +1,138 @@
+1138 C:\Program Files\Common Files\PC Tools\sMonitor\aDSBootTimes.xml
+49112 C:\Program Files\Common Files\PC Tools\sMonitor\PCTLNty.dll
+65536 C:\Program Files\Common Files\PC Tools\sMonitor\pctlogfile.etl
+633816 C:\Program Files\Common Files\PC Tools\sMonitor\PCTLogon.dll
+10555 C:\Program Files\Common Files\PC Tools\sMonitor\PCTProcess.txt
+6769 C:\Program Files\Common Files\PC Tools\sMonitor\ProcessSD1.txt
+150099 C:\Program Files\Common Files\PC Tools\sMonitor\shutdown.xml
+251626 C:\Program Files\Common Files\PC Tools\sMonitor\SMSvc.txt
+103896 C:\Program Files\Common Files\PC Tools\sMonitor\SSDMonitor.exe
+793048 C:\Program Files\Common Files\PC Tools\sMonitor\StartManSvc.exe
+2702 C:\Program Files\Common Files\Services\verisign.bmp
+35328 C:\Program Files\Common Files\SpeechEngines\Microsoft\TTS20\MSTTSCommon.dll
+47616 C:\Program Files\Common Files\SpeechEngines\Microsoft\TTS20\MSTTSDecWrp.dll
+150528 C:\Program Files\Common Files\SpeechEngines\Microsoft\TTS20\MSTTSEngine.dll
+8704 C:\Program Files\Common Files\SpeechEngines\Microsoft\TTS20\MSTTSLoc.dll
+274944 C:\Program Files\Common Files\SpeechEngines\Microsoft\TTS20\en-US\MSTTSFrontendENU.dll
+2560 C:\Program Files\Common Files\SpeechEngines\Microsoft\TTS20\en-US\MSTTSLoc.dll.mui
+16066 C:\Program Files\Common Files\SpeechEngines\Microsoft\TTS20\en-US\enu-dsk\M1033DSK.APL
+484600 C:\Program Files\Common Files\SpeechEngines\Microsoft\TTS20\en-US\enu-dsk\M1033DSK.CRT
+132508 C:\Program Files\Common Files\SpeechEngines\Microsoft\TTS20\en-US\enu-dsk\M1033DSK.IDX
+931696 C:\Program Files\Common Files\SpeechEngines\Microsoft\TTS20\en-US\enu-dsk\M1033DSK.LTS
+11166 C:\Program Files\Common Files\SpeechEngines\Microsoft\TTS20\en-US\enu-dsk\M1033DSK.UDT
+24064 C:\Program Files\Common Files\System\DirectDB.dll
+708608 C:\Program Files\Common Files\System\wab32.dll
+14610 C:\Program Files\Common Files\System\ado\adojavas.inc
+14951 C:\Program Files\Common Files\System\ado\adovbs.inc
+8192 C:\Program Files\Common Files\System\ado\msader15.dll
+1019904 C:\Program Files\Common Files\System\ado\msado15.dll
+57344 C:\Program Files\Common Files\System\ado\msado20.tlb
+57344 C:\Program Files\Common Files\System\ado\msado21.tlb
+73728 C:\Program Files\Common Files\System\ado\msado25.tlb
+73728 C:\Program Files\Common Files\System\ado\msado26.tlb
+77824 C:\Program Files\Common Files\System\ado\msado27.tlb
+73728 C:\Program Files\Common Files\System\ado\msado28.tlb
+73728 C:\Program Files\Common Files\System\ado\msado60.tlb
+352256 C:\Program Files\Common Files\System\ado\msadomd.dll
+20480 C:\Program Files\Common Files\System\ado\msadomd28.tlb
+57344 C:\Program Files\Common Files\System\ado\msador15.dll
+40960 C:\Program Files\Common Files\System\ado\msador28.tlb
+372736 C:\Program Files\Common Files\System\ado\msadox.dll
+28672 C:\Program Files\Common Files\System\ado\msadox28.tlb
+81920 C:\Program Files\Common Files\System\ado\msadrh15.dll
+143360 C:\Program Files\Common Files\System\ado\msjro.dll
+17408 C:\Program Files\Common Files\System\ado\en-US\msader15.dll.mui
+17920 C:\Program Files\Common Files\System\ado\sv-SE\msader15.dll.mui
+93696 C:\Program Files\Common Files\System\en-US\wab32res.dll.mui
+630 C:\Program Files\Common Files\System\msadc\adcjavas.inc
+623 C:\Program Files\Common Files\System\msadc\adcvbs.inc
+518 C:\Program Files\Common Files\System\msadc\handler.reg
+588 C:\Program Files\Common Files\System\msadc\handsafe.reg
+561152 C:\Program Files\Common Files\System\msadc\msadce.dll
+8192 C:\Program Files\Common Files\System\msadc\msadcer.dll
+94208 C:\Program Files\Common Files\System\msadc\msadcf.dll
+8192 C:\Program Files\Common Files\System\msadc\msadcfr.dll
+212992 C:\Program Files\Common Files\System\msadc\msadco.dll
+8192 C:\Program Files\Common Files\System\msadc\msadcor.dll
+81920 C:\Program Files\Common Files\System\msadc\msadcs.dll
+241664 C:\Program Files\Common Files\System\msadc\msadds.dll
+8192 C:\Program Files\Common Files\System\msadc\msaddsr.dll
+8192 C:\Program Files\Common Files\System\msadc\msdaprsr.dll
+286720 C:\Program Files\Common Files\System\msadc\msdaprst.dll
+192512 C:\Program Files\Common Files\System\msadc\msdarem.dll
+8192 C:\Program Files\Common Files\System\msadc\msdaremr.dll
+45056 C:\Program Files\Common Files\System\msadc\msdfmap.dll
+9728 C:\Program Files\Common Files\System\msadc\en-US\msadcer.dll.mui
+5120 C:\Program Files\Common Files\System\msadc\en-US\msadcfr.dll.mui
+5632 C:\Program Files\Common Files\System\msadc\en-US\msadcor.dll.mui
+13824 C:\Program Files\Common Files\System\msadc\en-US\msaddsr.dll.mui
+7168 C:\Program Files\Common Files\System\msadc\en-US\msdaprsr.dll.mui
+5632 C:\Program Files\Common Files\System\msadc\en-US\msdaremr.dll.mui
+10240 C:\Program Files\Common Files\System\msadc\sv-SE\msadcer.dll.mui
+5120 C:\Program Files\Common Files\System\msadc\sv-SE\msadcfr.dll.mui
+6144 C:\Program Files\Common Files\System\msadc\sv-SE\msadcor.dll.mui
+14848 C:\Program Files\Common Files\System\msadc\sv-SE\msaddsr.dll.mui
+7680 C:\Program Files\Common Files\System\msadc\sv-SE\msdaprsr.dll.mui
+5632 C:\Program Files\Common Files\System\msadc\sv-SE\msdaremr.dll.mui
+7168 C:\Program Files\Common Files\System\Ole DB\msdadc.dll
+7168 C:\Program Files\Common Files\System\Ole DB\msdaenum.dll
+7168 C:\Program Files\Common Files\System\Ole DB\msdaer.dll
+286720 C:\Program Files\Common Files\System\Ole DB\msdaora.dll
+8192 C:\Program Files\Common Files\System\Ole DB\msdaorar.dll
+94208 C:\Program Files\Common Files\System\Ole DB\msdaosp.dll
+249856 C:\Program Files\Common Files\System\Ole DB\msdaps.dll
+7168 C:\Program Files\Common Files\System\Ole DB\msdasc.dll
+610304 C:\Program Files\Common Files\System\Ole DB\msdasql.dll
+61440 C:\Program Files\Common Files\System\Ole DB\msdasqlr.dll
+98304 C:\Program Files\Common Files\System\Ole DB\msdatl3.dll
+20480 C:\Program Files\Common Files\System\Ole DB\msdatt.dll
+7168 C:\Program Files\Common Files\System\Ole DB\msdaurl.dll
+28672 C:\Program Files\Common Files\System\Ole DB\msxactps.dll
+864256 C:\Program Files\Common Files\System\Ole DB\oledb32.dll
+81920 C:\Program Files\Common Files\System\Ole DB\oledb32r.dll
+9804 C:\Program Files\Common Files\System\Ole DB\oledbjvs.inc
+9975 C:\Program Files\Common Files\System\Ole DB\oledbvbs.inc
+921600 C:\Program Files\Common Files\System\Ole DB\sqloledb.dll
+16384 C:\Program Files\Common Files\System\Ole DB\sqloledb.rll
+266240 C:\Program Files\Common Files\System\Ole DB\sqlxmlx.dll
+8192 C:\Program Files\Common Files\System\Ole DB\sqlxmlx.rll
+8192 C:\Program Files\Common Files\System\Ole DB\en-US\msdaorar.dll.mui
+5632 C:\Program Files\Common Files\System\Ole DB\en-US\msdasqlr.dll.mui
+47616 C:\Program Files\Common Files\System\Ole DB\en-US\oledb32r.dll.mui
+44032 C:\Program Files\Common Files\System\Ole DB\en-US\sqloledb.rll.mui
+17920 C:\Program Files\Common Files\System\Ole DB\en-US\sqlxmlx.rll.mui
+8704 C:\Program Files\Common Files\System\Ole DB\sv-SE\msdaorar.dll.mui
+5632 C:\Program Files\Common Files\System\Ole DB\sv-SE\msdasqlr.dll.mui
+50176 C:\Program Files\Common Files\System\Ole DB\sv-SE\oledb32r.dll.mui
+45568 C:\Program Files\Common Files\System\Ole DB\sv-SE\sqloledb.rll.mui
+17920 C:\Program Files\Common Files\System\Ole DB\sv-SE\sqlxmlx.rll.mui
+94720 C:\Program Files\Common Files\System\sv-SE\wab32res.dll.mui
+922176 C:\Program Files\DIFX\25C232B9F73C1237\DPInst.exe
+37376 C:\Program Files\DVD Maker\audiodepthconverter.ax
+77884 C:\Program Files\DVD Maker\bod_r.TTF
+46592 C:\Program Files\DVD Maker\directshowtap.ax
+56760 C:\Program Files\DVD Maker\Eurosti.TTF
+31232 C:\Program Files\DVD Maker\fieldswitch.ax
+32768 C:\Program Files\DVD Maker\offset.ax
+56832 C:\Program Files\DVD Maker\rtstreamsink.ax
+39936 C:\Program Files\DVD Maker\rtstreamsource.ax
+98824 C:\Program Files\DVD Maker\SecretST.TTF
+55808 C:\Program Files\DVD Maker\soniccolorconverter.ax
+39424 C:\Program Files\DVD Maker\sonicsptransform.ax
+242176 C:\Program Files\DVD Maker\WMM2CLIP.dll
+51712 C:\Program Files\DVD Maker\en-US\DVDMaker.exe.mui
+12288 C:\Program Files\DVD Maker\en-US\OmdProject.dll.mui
+7168 C:\Program Files\DVD Maker\en-US\WMM2CLIP.dll.mui
+12516 C:\Program Files\DVD Maker\Shared\Common.fxh
+27935 C:\Program Files\DVD Maker\Shared\DissolveAnother.png
+751669 C:\Program Files\DVD Maker\Shared\DissolveNoise.png
+14239 C:\Program Files\DVD Maker\Shared\Filters.xml
+36575 C:\Program Files\DVD Maker\Shared\Parity.fx
+10123 C:\Program Files\DVD Maker\Shared\DvdStyles\16to9Squareframe_Buttongraphic.png
+3286 C:\Program Files\DVD Maker\Shared\DvdStyles\16to9Squareframe_SelectionSubpicture.png
+3316 C:\Program Files\DVD Maker\Shared\DvdStyles\16to9Squareframe_VideoInset.png
+11861 C:\Program Files\DVD Maker\Shared\DvdStyles\4to3Squareframe_Buttongraphic.png
+3304 C:\Program Files\DVD Maker\Shared\DvdStyles\4to3Squareframe_SelectionSubpicture.png
+3467 C:\Program Files\DVD Maker\Shared\DvdStyles\4to3Squareframe_VideoInset.png
+4726 C:\Program Files\DVD Maker\Shared\DvdStyles\BlackRectangle.bmp
+27281 C:\Program Files\DVD Maker\Shared\DvdStyles\circleround_glass.png

@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Jeremi Stadler</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+		
+	<script type="text/javascript" src="analytics.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.js"></script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function ()
+		{
+			$("#FadeContent").fadeOut(0);
+
+			var page = document.URL;
+			var firstPage = "home";
+
+			if (page.indexOf("#") > 0)
+				firstPage = page.substring(page.indexOf("#") + 1);
+
+			$.ajax({
+				url: firstPage + ".html"
+			}).done(function (html)
+			{
+				$("#ajaxContent").html(html);
+				$("#FadeContent").fadeIn(300);
+			});
+		});
+
+		function SmoothNavigateTo(resultUrl)
+		{
+			$("#FadeContent").fadeOut(300);
+			var msStart = new Date().getTime();
+
+			$.ajax({ url: resultUrl }).done(function (html)
+			{
+				var maxDelay = 300 - (new Date().getTime() - msStart);
+				if (maxDelay < 0) maxDelay = 0;
+
+				setTimeout(function ()
+				{
+					$("#ajaxContent").html(html);
+					$("#FadeContent").fadeIn(300);
+				}, maxDelay);
+			});
+		}
+
+	</script>
+
+</head>
+
+<body style="font-family:'Arial'; color: rgb(234, 234, 234)">
+
+	<header>
+		<div id="header">
+			<div class="Content">
+				<div id="MenuTitle">
+					Jeremi's Showcase
+				</div>
+
+				<img alt="Title" src="Images/Title.png" width="0" height="0" />
+
+				<nav>
+					<ul id="MenuList">
+						<li><a href="#home" onclick="SmoothNavigateTo('home.html')" >Home</a></li>
+						<li><a href="#about" onclick="SmoothNavigateTo('about.html')">About</a></li>
+						<li><a href="#fileformats" onclick="SmoothNavigateTo('fileformats.html')">Filformat (Swedish)</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+
+			
+	<div class="Content">
+		<div id="FadeContent">
+			<div id="ajaxContent"></div>
+
+			<div style="height: 10px" />
+			<img src="Images/hr.png" height="0" width="800" />
+
+			<div id="footer">
+				<ul>
+					<li>Copyright ©  Codeyeti by Jeremi Stadler</li>
+					<li><a class="Links" href="http://kite.codeyeti.net/">Måns Page</a></li>
+					<li><a class="Links" href="http://poxy.codeyeti.net/">Jockes Page</a></li>
+				</ul>
+			</div>
+
+			<div style="height: 10px" />
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Spline - Codeyeti.net</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+		
+		<style>
+			body
+			{
+				background-color: rgb(255,255,255);
+				background-image: url("gplay.png");
+
+				margin: 0;
+				padding: 0;
+
+				overflow-x: hidden;
+			}
+
+			html
+			{
+				margin: 0;
+				padding: 0;
+
+				font-family: Arial;
+			}
+			
+			p 
+			{
+				margin: 5px 0;
+			}
+			
+			span
+			{
+				height:2em;
+				padding: 0.4em;
+			}
+			
+			ul li
+			{
+				padding: 0;
+				margin; 0;
+				
+				margin: 4px 0;
+			}
+			
+			#ControlBox
+			{
+				position:fixed; 
+				top:-1px; 
+				left: -1px; 
+				//display: table;
+				//display: none;
+				z-index:10;
+				background-color: rgba(0,0,0,0.1); 
+				border: 1px solid rgba(10,10,10,0.5);
+				
+				box-shadow: 0 0 8px rgba(0,0,0,0.3);
+			}
+			
+			#WrapperBox
+			{
+				margin: 5px;
+			}
+			
+			.functionList
+			{
+				list-style-type:none;
+				padding: 0;
+				margin; 0;
+			}
+			
+			.functionBox 
+			{
+				width: 15em; 
+				height: 1.3em;
+				
+				margin-left:0.5em;
+				//margin-right:0.5em;
+				
+				//margin-top:0.2em;
+				//margin-bottom:0.2em;
+			}
+			
+			.colorBox
+			{
+				width: 1.3em; 
+				height: 1.3em; 
+				background-color:cornflowerblue; 
+				
+				float:left; 
+				
+				//margin-left:0.5em;
+				//margin-right:0.2em;
+				
+				//margin-top:0.2em;
+				//margin-bottom:0.0em;
+				
+				border: 1px solid rgb(100,100,100);
+			}
+			
+			#infoPanel
+			{
+				position:fixed;
+				top: 300px;
+				left: -1px;
+				width: 100px;
+				background-color: rgba(0,0,0,0.1); 
+				border: 1px solid rgba(10,10,10,0.5);
+				box-shadow: 0 0 8px rgba(0,0,0,0.3);
+			}
+			
+			#infoPanel li
+			{
+				display:inline-block;
+				padding-left:0.3em;
+			}
+		</style>
+		
+		<script type="text/javascript" src="script.js"></script>
+		</head>
+	<body>
+		<canvas id="BackgroundCanvas" style="position:fixed; top: 0; left: 0;"></canvas>
+		
+		<div id="ControlBox">
+			<div id="WrapperBox">
+				<ul class="functionList">
+					<li>
+						<div class="colorBox" id="colorBox1"></div>
+						<input class="functionBox" type="text" id="funcTextBox1" value="Math.sin(x / 10 + 0) * 10"/>
+					</li>
+					
+					<li>
+						<div class="colorBox" id="colorBox2"></div>
+						<input class="functionBox" type="text" id="funcTextBox2" value="Math.sin(x / 10 + 1) * 11"/>
+					</li>
+						<li>
+						
+						<div class="colorBox" id="colorBox3"></div>
+						<input class="functionBox" type="text" id="funcTextBox3" value="Math.sin(x / 10 + 2) * 12"/>
+					</li>
+					<li>
+						<div class="colorBox" id="colorBox4"></div>
+						<input class="functionBox" type="text" id="funcTextBox4" value="Math.sin(x / 10 + 3) * 13"/>
+					</li>
+					<li>
+						<div class="colorBox" id="colorBox5"></div>
+						<input class="functionBox" type="text" id="funcTextBox5" value="Math.sin(x / 10 + 4) * 14"/>
+					</li>
+					<li>
+						<div class="colorBox" id="colorBox6"></div>
+						<input class="functionBox" type="text" id="funcTextBox6" value="Math.sin(x / 10 + 5) * 15"/>
+					</li>
+				</ul>
+				<div style="display:inline;">
+					<input id="GridEnabled" checked="checked" type="checkbox" />Grid
+					<input id="MarkersEnabled" checked="checked" type="checkbox" style="margin-left:15px;" />Markers
+				</div>
+				</br>
+			</div>
+		</div>
+		
+		<div id="infoPanel">
+			<ul class="functionList">
+				<li>
+					<div class="colorBox" id="infoColorBox1"></div>
+					<span id="infoLabel1">1</span>
+				</li>
+				<li>
+					<div class="colorBox" id="infoColorBox2"></div>
+					<span id="infoLabel2">1</span>
+				</li>
+				<li>
+					<div class="colorBox" id="infoColorBox3"></div>
+					<span id="infoLabel3">1</span>
+				</li>
+				<li>
+					<div class="colorBox" id="infoColorBox4"></div>
+					<span id="infoLabel4">1</span>
+				</li>
+				<li>
+					<div class="colorBox" id="infoColorBox5"></div>
+					<span id="infoLabel5">1</span>
+				</li>
+				<li>
+					<div class="colorBox" id="infoColorBox6"></div>
+					<span id="infoLabel6">1</span>
+				</li>
+			</ul>
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,29 @@
+﻿body
+{
+	background-color: rgb(255,255,255);
+
+	margin: 0;
+	padding: 0;
+
+	overflow-x: hidden;
+}
+
+html
+{
+	margin: 0;
+	padding: 0;
+
+	font-family: Arial;
+}
+
+@media screen and (-ms-view-state: fullscreen-landscape) {
+}
+
+@media screen and (-ms-view-state: filled) {
+}
+
+@media screen and (-ms-view-state: snapped) {
+}
+
+@media screen and (-ms-view-state: fullscreen-portrait) {
+}

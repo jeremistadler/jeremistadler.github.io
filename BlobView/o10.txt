@@ -1,0 +1,31 @@
+
+4553 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc1500l.spf
+4553 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc1500t.spf
+3426 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc1600c.spf
+3428 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc1600l.spf
+3321 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2100n.spf
+3318 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2100t.spf
+3321 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2150n.spf
+3318 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2150t.spf
+3321 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2170n.spf
+3318 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2170t.spf
+3321 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2200n.spf
+3318 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2200t.spf
+3321 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2300n.spf
+3318 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2300t.spf
+3426 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2350c.spf
+3428 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2350l.spf
+3321 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2400n.spf
+3318 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2400t.spf
+3321 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2500n.spf
+3318 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppsc2500t.spf
+3434 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppst2600n.spf
+3439 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppst2600s.spf
+3435 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppst2600t.spf
+3434 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppst2700n.spf
+3439 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppst2700s.spf
+3435 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\hppst2700t.spf
+544384 C:\Program Files\Common Files\Hewlett-Packard\Scanjet\bin\hpsjrreg.exe
+163968 C:\Program Files\Common Files\HP\Digital Imaging\Bin\hpqcutil.dll
+200832 C:\Program Files\Common Files\HP\Digital Imaging\Bin\HPQIML02.dll
+794752 C:\Program Files\Common Files\HP\Digital Imaging\Bin\hpqpsb02.dll

@@ -1,0 +1,120 @@
+﻿<h2>Bildformat</h2>
+
+
+<style type="text/css">
+   
+   img.ii
+   {
+    width: 100px;   
+    height: 100px;   
+   }
+   
+
+   .tt
+   {
+     margin: 0;
+     padding: 0;
+     vertical-align: text-top;
+   }
+   
+   .tt td
+   {
+     margin: 0;
+     padding: 0;
+     vertical-align: top;
+   }
+   
+   
+ </style>
+
+<table class="tt" >
+    <tr>
+        <td style="min-width: 100px;">Filformat</td>
+        <td>Andvändning</td>
+        <td>Bra</td>
+        <td>Dålig</td>
+    </tr>
+    <tr>
+        <td>Gif</td>
+        <td>
+            Rörliga bilder, stödjer max 256 olika färger <br /> 
+            Endast en bit transparens så antigen är en pixel genomskinlig<br />
+            eller helt synlig
+        </td>
+        <td><img class="ii" src="Images/smiley.gif" /></td>
+        <td><img class="ii" src="Images/candy.gif" /></td>
+    </tr>
+    <tr>
+        <td>Png</td>
+        <td>
+            Transparenta bilder eller bilder med få färger <br />
+            Png är är lossless format vilket betyder att bilden inte försämras<br />
+            Det leder till att naturliga bilder kan bli väldigt stora jämfört med jpeg
+        </td>
+        <td><img class="ii" src="Images/rotatetrans.png" /></td>
+        <td><img class="ii" src="Images/Greenland_scenery.jpg" /></td>
+    </tr>
+    <tr>
+        <td>Jpeg</td>
+        <td>
+            Natur bilder, familjefoton och liknande, Stödjer inte genomskinlighet <br /> 
+            Text kan bli väldigt ful vid lägre kvalitets inställningar
+        </td>
+        <td><img class="ii" src="Images/Greenland_scenery.jpg" /></td>
+        <td><img class="ii" src="Images/rotatetrans2.jpg" /></td>
+    </tr>
+    <tr>
+        <td>Svg</td>
+        <td>
+            Svg är vector filformat som är motsattsen till rasteraserade bildformat,<br /> 
+            Svg lämpar sig bra åt logotyper och bilder som behövs förstoras
+        </td>
+        <td><img class="ii" src="Images/svg_icon02.png" /></td>
+        <td><img class="ii" src="Images/candy.jpg" /></td>
+    </tr>
+</table>
+
+<h2>Canvas och WebGL</h2>
+<p>
+    Två stora nya saker i HTML5 standarden är Canvas och WebGL. <br /> 
+    Canvas är ett api för att rita 2D raster grafik, många webbläsare idag har stöd för hårdvaru accellererat canvas vilket låter lite mer krävande 2D spel att köra via Canvas. 
+    WebGL är ett API för 3D grafik genom en lättare variant av OpenGL som är en av de största standarderna för 3D grafik. 
+</p>
+
+<br /><br />
+<br /><br />
+<br /><br />
+
+<h2>Ljud och Bild</h2>
+<p>
+    Såsom det finns flera bildformat för bilder finns det flera video och ljudformat för filmer och musik. 
+    För att kombinera olika format under en fil finns container filer. Ett vanligt container format är avi, avi filer kan inehålla både video, ljud och undertexter. 
+    För att kunna läsa och skriva till alla dessa format i container filerna finns konverterare som kallas för kodek. 
+    Därför kan man inte säga att en videospelare klarar av att spela up avi filer.
+    
+</p>
+<p>
+    Det vanligaste video formatet idag kallas för H.264. 
+    Formatet används ofta för höguplöst video just av den anledningen att det komprimerar video väldigt bra.
+    H.264 använder vanlig bild för bild komprimering.
+    Istället sparar man bara skilnaden från den föregående bilden. 
+    Några nackdelar:
+</p>    
+
+<ul>
+    <li>Dom kräver mycket kraft för att kodas/avkodas</li>
+    <li>Filmer som ändras ofta tar mer plats</li>
+    <li>Om det är fel någonstans i filmen påverkas ofta flera bilder efter felet</li>
+</ul>
+<p>
+    För att koda och avkoda hög uplöst video snabbare används ofta olika Grafik acceleratorer såsom grafikkort. Den tekniken kallas för hårdvaru-accelereation.
+
+    </p>
+
+
+<p>
+    Vid applicationer som inte tillåter sökning i datan finns filformatet Ogg, 
+    Ogg än nämligen uppbygt så datan kän läsas i sekvens utan att läsaren behöver information längre fram. 
+    Det kan vara väldigt praktist i tex websidor eller spel, dvs då hela ljudfilen inte behövs på en gång.
+    Ogg är ochså ett bra exempel på ett container format som bara stödjer ett fåtal kodek.
+</p>

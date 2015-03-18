@@ -1,0 +1,59 @@
+257344 C:\Program Files\Apple Software Update\ScriptingObjectModel.dll
+561984 C:\Program Files\Apple Software Update\SoftwareUpdate.exe
+225600 C:\Program Files\Apple Software Update\SoftwareUpdateAdmin.dll
+352064 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.dll
+188736 C:\Program Files\Apple Software Update\Plugins\EXEInstallPlugin.dll
+114496 C:\Program Files\Apple Software Update\Plugins\MSIInstallPlugin.dll
+30910 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\Software Update.tiff
+29984 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\da.lproj\SoftwareUpdateLocalized.dll
+31520 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\de.lproj\SoftwareUpdateLocalized.dll
+28960 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\en.lproj\SoftwareUpdateLocalized.dll
+31520 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\es.lproj\SoftwareUpdateLocalized.dll
+29984 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\fi.lproj\SoftwareUpdateLocalized.dll
+31520 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\fr.lproj\SoftwareUpdateLocalized.dll
+31008 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\it.lproj\SoftwareUpdateLocalized.dll
+25888 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\ja.lproj\SoftwareUpdateLocalized.dll
+25888 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\ko.lproj\SoftwareUpdateLocalized.dll
+29984 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\nb.lproj\SoftwareUpdateLocalized.dll
+31520 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\nl.lproj\SoftwareUpdateLocalized.dll
+30496 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\pl.lproj\SoftwareUpdateLocalized.dll
+31008 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\pt.lproj\SoftwareUpdateLocalized.dll
+31008 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\pt_PT.lproj\SoftwareUpdateLocalized.dll
+29984 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\ru.lproj\SoftwareUpdateLocalized.dll
+29984 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\sv.lproj\SoftwareUpdateLocalized.dll
+23840 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\zh_CN.lproj\SoftwareUpdateLocalized.dll
+24352 C:\Program Files\Apple Software Update\SoftwareUpdate.Resources\zh_TW.lproj\SoftwareUpdateLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\da.lproj\SoftwareUpdateFilesLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\de.lproj\SoftwareUpdateFilesLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\en.lproj\SoftwareUpdateFilesLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\es.lproj\SoftwareUpdateFilesLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\fi.lproj\SoftwareUpdateFilesLocalized.dll
+10016 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\fr.lproj\SoftwareUpdateFilesLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\it.lproj\SoftwareUpdateFilesLocalized.dll
+8992 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\ja.lproj\SoftwareUpdateFilesLocalized.dll
+8992 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\ko.lproj\SoftwareUpdateFilesLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\nb.lproj\SoftwareUpdateFilesLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\nl.lproj\SoftwareUpdateFilesLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\pl.lproj\SoftwareUpdateFilesLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\pt.lproj\SoftwareUpdateFilesLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\pt_PT.lproj\SoftwareUpdateFilesLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\ru.lproj\SoftwareUpdateFilesLocalized.dll
+9504 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\sv.lproj\SoftwareUpdateFilesLocalized.dll
+8480 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\zh_CN.lproj\SoftwareUpdateFilesLocalized.dll
+8992 C:\Program Files\Apple Software Update\SoftwareUpdateFiles.Resources\zh_TW.lproj\SoftwareUpdateFilesLocalized.dll
+23440 C:\Program Files\ATI\CIM\Bin\atidcmxx.sys
+65536 C:\Program Files\ATI\CIM\Bin\ATILog.dll
+330256 C:\Program Files\ATI\CIM\Bin\ATISetup.exe
+319456 C:\Program Files\ATI\CIM\Bin\difxapi.dll
+1202 C:\Program Files\ATI\CIM\Bin\InstallManagerApp.exe.manifest
+299008 C:\Program Files\ATI\CIM\Bin\LanguageMgr.dll
+456 C:\Program Files\ATI\CIM\Bin\Microsoft.VC80.ATL.manifest
+522 C:\Program Files\ATI\CIM\Bin\Microsoft.VC80.CRT.manifest
+550 C:\Program Files\ATI\CIM\Bin\Microsoft.VC80.MFC.manifest
+1240 C:\Program Files\ATI\CIM\Bin\Microsoft.VC80.MFCLOC.manifest
+467 C:\Program Files\ATI\CIM\Bin\Microsoft.VC80.OpenMP.manifest
+548864 C:\Program Files\ATI\CIM\Bin\msvcp80.dll
+626688 C:\Program Files\ATI\CIM\Bin\msvcr80.dll
+610304 C:\Program Files\ATI\CIM\Bin\PackageManager.dll
+4211 C:\Program Files\ATI\CIM\Bin\readme.rtf
+317968 C:\Program Files\ATI\CIM\Bin\SetACL.exe
