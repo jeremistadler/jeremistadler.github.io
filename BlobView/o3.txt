@@ -1,0 +1,56 @@
+60 C:\Levande\Kroppen\BARNLAND.URL
+2850 C:\Levande\Kroppen\DeIsL1.isu
+2748 C:\Levande\Kroppen\DeIsL2.isu
+1270 C:\Levande\Kroppen\LB.ICO
+56 C:\Levande\Kroppen\LB.URL
+18660 C:\Levande\Kroppen\MAHB.IND
+61 C:\Levande\Kroppen\MAHB.ini
+853902 C:\Levande\Kroppen\MAHB.PNG
+59 C:\Levande\Kroppen\MAMMAPAP.URL
+51072 C:\Levande\Kroppen\README.WRI
+26624 C:\Levande\Kroppen\UNINST.DLL
+47104 C:\Levande\Kroppen\VIKTIGT.WRI
+174 C:\Program Files\desktop.ini
+9584 C:\Program Files\uninstal.log
+28451 C:\Program Files\Adobe\Acrobat 5.0\Help\ENU\ACROBAT.PDF
+152461 C:\Program Files\Adobe\Acrobat 5.0\Help\ENU\MiniReader.pdf
+397312 C:\Program Files\Adobe\Acrobat 5.0\Reader\Acelite.dll
+53248 C:\Program Files\Adobe\Acrobat 5.0\Reader\ACROFX32.DLL
+147456 C:\Program Files\Adobe\Acrobat 5.0\Reader\Bib.dll
+86016 C:\Program Files\Adobe\Acrobat 5.0\Reader\OPP.dll
+198 C:\Program Files\Adobe\Acrobat 5.0\Reader\RdrENU.xml
+21712 C:\Program Files\Adobe\Acrobat 5.0\Reader\ReadMe.html
+37808 C:\Program Files\Adobe\Acrobat 5.0\Reader\ActiveX\AcroIEHelper.ocx
+390096 C:\Program Files\Adobe\Acrobat 5.0\Reader\ActiveX\pdf.ocx
+4044 C:\Program Files\Adobe\Acrobat 5.0\Reader\ActiveX\pdf.tlb
+103344 C:\Program Files\Adobe\Acrobat 5.0\Reader\Browser\nppdf32.dll
+34646 C:\Program Files\Adobe\Acrobat 5.0\Reader\JavaScripts\aform.js
+23510 C:\Program Files\Adobe\Acrobat 5.0\Reader\JavaScripts\Annots.js
+20488 C:\Program Files\Adobe\Acrobat 5.0\Reader\Legal\License.txt
+46 C:\Program Files\Adobe\Acrobat 5.0\Reader\Optional\README.TXT
+901196 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\AcroFill.api
+339968 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\DigSig.api
+651339 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\EScript.api
+69705 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\EWH32.api
+53312 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\hls.api
+53316 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\IA32.api
+815179 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\PPKLite.api
+249930 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\reflow.api
+8402 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\SelfSign.prc
+45133 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\Sendmail.api
+114763 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\weblink.api
+438346 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\WebPDF.api
+24576 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\WHA.api
+999497 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\Annotations\Annots.api
+112498 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\Annotations\Stamps\Words.pdf
+33013 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\Annotations\Stamps\ENU\Faces.pdf
+46897 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\Annotations\Stamps\ENU\Pointers.pdf
+115957 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\Annotations\Stamps\ENU\Standard.pdf
+24576 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\InterTrust\DocBox.api
+274509 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\Movie\Movie.api
+24576 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\Movie\QT2.dll
+32768 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\Movie\QT3.dll
+36864 C:\Program Files\Adobe\Acrobat 5.0\Reader\plug_ins\Movie\QT4.dll
+892928 C:\Program Files\Adobe\Acrobat 5.0\Reader\SPPlugins\ADMPlugin.apl
+200704 C:\Program Files\Adobe\Acrobat 5.0\Reader\SPPlugins\ExpressViews.apl
+1408 C:\Program Files\Adobe\Acrobat 5.0\Resource\ENUtxt.pdf
