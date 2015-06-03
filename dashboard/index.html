@@ -22,8 +22,8 @@
         margin: 20px;
         background: white;
         overflow: hidden;
-        width: 300px;
-        height: 200px;
+        width: 400px;
+        height: 300px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
       }
 
@@ -32,7 +32,7 @@
       }
 
       .card-h2 {
-        height: 400px;
+        height: 300px;
       }
 
       .card iframe{
@@ -51,7 +51,11 @@
         <iframe src="http://kibana.pliq.se/#/visualize/create?embed&type=pie&indexPattern=speed-laget-assets-v1&_g=(refreshInterval:(display:Off,section:0,value:0),time:(from:now-7d,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),vis:(aggs:!((id:'1',params:(field:size),schema:metric,type:sum),(id:'2',params:(field:parent,order:desc,orderBy:'1',size:5),schema:segment,type:terms)),listeners:(),params:(addLegend:!t,addTooltip:!t,isDonut:!t,shareYAxis:!t),type:pie))"></iframe>
       </div>
 
-      <div class="card card-w2">
+      <div class="card card-w2 card-h2">
+        <iframe src="http://kibana.pliq.se/#/visualize/edit/Laget-Startsite-score-perc.?embed&_g=(refreshInterval:(display:Off,section:0,value:0),time:(from:now-7d,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),vis:(aggs:!((id:'1',params:(field:score,percents:!(1,5,25,50,75,95,99)),schema:metric,type:percentiles),(id:'2',params:(extended_bounds:(),field:Time,interval:hour,min_doc_count:1),schema:segment,type:date_histogram)),listeners:(),params:(addLegend:!t,addTooltip:!t,defaultYExtents:!f,mode:stacked,shareYAxis:!t),type:area))"></iframe>
+      </div>
+
+      <div class="card card-w2 card-h2">
         <iframe src="http://kibana.pliq.se/#/visualize/edit/Laget-Assets-by-type?embed&_g=(refreshInterval:(display:Off,section:0,value:0),time:(from:now-7d,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),vis:(aggs:!((id:'1',params:(field:size),schema:metric,type:avg),(id:'2',params:(extended_bounds:(),field:Time,interval:hour,min_doc_count:1),schema:segment,type:date_histogram),(id:'3',params:(field:type,order:desc,orderBy:'1',size:5),schema:group,type:terms)),listeners:(),params:(addLegend:!t,addTooltip:!t,defaultYExtents:!f,mode:stacked,shareYAxis:!t),type:area))" ></iframe>
       </div>
 
@@ -62,6 +66,19 @@
       <div class="card card-w2 card-h2">
         <iframe src="http://kibana.pliq.se/#/visualize/edit/Laget-Top-worst-pages-by-number-of-requests?embed&_g=(refreshInterval:(display:Off,section:0,value:0),time:(from:now-4h,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),vis:(aggs:!((id:'1',params:(field:yslowrequestsv),schema:metric,type:avg),(id:'2',params:(field:url,order:desc,orderBy:'1',size:6),schema:segment,type:terms)),listeners:(),params:(addLegend:!f,addTooltip:!t,defaultYExtents:!f,mode:stacked,shareYAxis:!t),type:histogram))"></iframe>
       </div>
+
+      <div class="card card-w2 card-h2">
+        <iframe src="http://kibana.pliq.se/#/visualize/edit/Laget-Startpage-avg.-page-size?embed&_g=(refreshInterval:(display:Off,section:0,value:0),time:(from:now-7d,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),vis:(aggs:!((id:'1',params:(field:yslowpageWeightv),schema:metric,type:avg),(id:'2',params:(extended_bounds:(),field:Time,interval:auto,min_doc_count:1),schema:segment,type:date_histogram)),listeners:(),params:(addLegend:!f,addTooltip:!t,defaultYExtents:!f,shareYAxis:!t),type:line))"></iframe>
+      </div>
+
+      <div class="card card-w2 card-h2">
+        <iframe src="http://kibana.pliq.se/#/visualize/edit/Laget-Startpage-avg.-requests-per-page?embed&_g=(refreshInterval:(display:Off,section:0,value:0),time:(from:now-7d,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),vis:(aggs:!((id:'1',params:(field:yslowrequestsv),schema:metric,type:avg),(id:'2',params:(extended_bounds:(),field:Time,interval:auto,min_doc_count:1),schema:segment,type:date_histogram)),listeners:(),params:(addLegend:!f,addTooltip:!t,defaultYExtents:!f,shareYAxis:!t),type:line))"></iframe>
+      </div>
+
+      <div class="card card-w2 card-h2">
+        <iframe src="http://kibana.pliq.se/#/visualize/edit/Laget-Startpage-perc.-requests?embed&_g=(refreshInterval:(display:Off,section:0,value:0),time:(from:now-7d,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),vis:(aggs:!((id:'1',params:(field:score,percents:!(5,25,50,75,95)),schema:metric,type:percentiles),(id:'2',params:(extended_bounds:(),field:Time,interval:auto,min_doc_count:1),schema:segment,type:date_histogram)),listeners:(),params:(addLegend:!f,addTooltip:!t,defaultYExtents:!f,shareYAxis:!t),type:line))"></iframe>
+      </div>
+
     </div>
 </body>
 </html>
