@@ -1,0 +1,28 @@
+.axis {
+  shape-rendering: crispEdges;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgb(100, 100, 100);
+}
+
+.axis path{
+  stroke-width: 1px;
+  stroke: rgb(200, 200, 200);
+  fill: none;
+}
+
+.axis line{
+  stroke-width: 1px;
+  stroke: rgb(200, 200, 200);
+  fill: none;
+}
+
+.title{
+  text-align: center;
+  color: rgb(40, 40, 40);
+  font-size: 25px;
+  margin-top: 15px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
