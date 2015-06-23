@@ -1,5 +1,6 @@
 html{
   background: #EDEDED;
+  font-family: 'Roboto', sans-serif;
 }
 
 .card_holder{
@@ -13,6 +14,10 @@ html{
   background: white;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.card-w0 {
+  width: 150px;
 }
 
 .card-w1 {
@@ -38,4 +43,33 @@ html{
   stroke: none;
   width: 100%;
   height: 100%;
+}
+
+.template{
+  display: none;
+  visibility: hidden;
+}
+
+.trello__header{
+  font-size: 19px;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+}
+
+.trello__item {
+  text-align: center;
+  flex: 1;
+  min-width: 100px;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 10px;
+}
+
+.trello__item h2{
+  font-size: 17px;
+  font-weight: 300;
+}
+
+.trello__item p{
+  font-size: 13px;
 }
