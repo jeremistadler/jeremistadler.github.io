@@ -50,6 +50,15 @@ html{
   visibility: hidden;
 }
 
+#trello__content{
+  display: flex;
+  width: 100%;
+}
+
+.trello__wrapper{
+  display: none
+}
+
 .trello__header{
   font-size: 19px;
   font-weight: 500;

@@ -34,7 +34,7 @@ Trello.get("boards/LqUUuhsu/cards", function(cards) {
   $('#trello__content').html('');
   var renderTrelloItem = function(name) {
       var renderedHtml = renderTemplate(templateId, { name: name, count: (cardsByLabel[name] || []).length });
-      $('.trello__wrapper').append(renderedHtml);
+      $('#trello__content').append(renderedHtml);
   }
 
   renderTrelloItem('Normal')
@@ -42,6 +42,7 @@ Trello.get("boards/LqUUuhsu/cards", function(cards) {
   renderTrelloItem('Low')
   renderTrelloItem('App')
 
+  $('.trello__wrapper').show();
 });
 };
 
