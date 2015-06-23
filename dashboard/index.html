@@ -10,6 +10,7 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
     <link href="chart.css" rel="stylesheet" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -25,16 +26,16 @@
   </div>
 
   <div class="trello__wrapper">
-      <div class="card_holder card card-w2">
-        <h1 class="trello__header">Trello bug board</h1>
+      <div class="card_holder card card-w15">
+        <h1 class="trello__header"><i class="fa fa-trello"></i>Trello bug board</h1>
         <div id="trello__content"></div>
       </div>
     </div>
 
       <div id="trello__template" class="template">
         <div class="trello__item ">
+          <p style="color:{{color}}">{{count}}</p>
           <h2>{{name}}</h2>
-          <p>{{count}}</p>
         </div>
       </div>
 

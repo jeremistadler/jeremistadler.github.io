@@ -24,6 +24,10 @@ html{
   width: 300px;
 }
 
+.card-w15 {
+  width: 400px;
+}
+
 .card-w2 {
   width: 600px;
 }
@@ -53,6 +57,7 @@ html{
 #trello__content{
   display: flex;
   width: 100%;
+    flex-wrap: wrap;
 }
 
 .trello__wrapper{
@@ -60,10 +65,18 @@ html{
 }
 
 .trello__header{
-  font-size: 19px;
+  font-size: 16px;
   font-weight: 500;
   width: 100%;
-  text-align: center;
+  background: #026aa7;
+  margin: 0;
+  padding: 10px;
+  color: white;
+}
+
+.trello__header i{
+  color: white;
+  margin-right: 10px;
 }
 
 .trello__item {
@@ -75,10 +88,12 @@ html{
 }
 
 .trello__item h2{
-  font-size: 17px;
-  font-weight: 300;
+  font-size: 13px;
+    line-height: 3px;
+    font-weight: 300;
+    color: #555;
 }
 
 .trello__item p{
-  font-size: 13px;
+  font-size: 25px;
 }

@@ -18,6 +18,7 @@ Trello.get("boards/LqUUuhsu/cards", function(cards) {
   $("#output").empty();
   var cardsByLabel = {};
   var cardsByList = {};
+  var unlabledCards = [];
 
   $.each(cards, function(ix, card) {
     for	(var i = 0; i < card.labels.length; i++)
@@ -26,21 +27,25 @@ Trello.get("boards/LqUUuhsu/cards", function(cards) {
       cardsByLabel[card.labels[i].name].push(card);
     }
 
+    if (card.labels.length == 0)
+      unlabledCards.push(card);
+
     cardsByList[card.listId] = cardsByList[card.listId] || [];
     cardsByList[card.listId].push(card);
   });
 
-  var templateId = '#trello__template';
   $('#trello__content').html('');
-  var renderTrelloItem = function(name) {
-      var renderedHtml = renderTemplate(templateId, { name: name, count: (cardsByLabel[name] || []).length });
+  var renderTrelloItem = function(name, color, count) {
+      var renderedHtml = renderTemplate('#trello__template', { name: name, color:color, count: count});
       $('#trello__content').append(renderedHtml);
   }
 
-  renderTrelloItem('Normal')
-  renderTrelloItem('High')
-  renderTrelloItem('Low')
-  renderTrelloItem('App')
+  renderTrelloItem('Low', 'rgb(232, 230, 31)', (cardsByLabel['Low'] || []).length)
+  renderTrelloItem('Normal', 'orange', (cardsByLabel['Normal'] || []).length)
+  renderTrelloItem('High', 'red', (cardsByLabel['High'] || []).length)
+  renderTrelloItem('App', 'gray', (cardsByLabel['App'] || []).length)
+  renderTrelloItem('Unlabled', 'gray', unlabledCards.length)
+  renderTrelloItem('Total', 'black', cards.length)
 
   $('.trello__wrapper').show();
 });
