@@ -44,7 +44,7 @@ Trello.get("boards/LqUUuhsu/cards", function(cards) {
   renderTrelloItem('Normal', 'orange', (cardsByLabel['Normal'] || []).length)
   renderTrelloItem('High', 'red', (cardsByLabel['High'] || []).length)
   renderTrelloItem('App', 'gray', (cardsByLabel['App'] || []).length)
-  renderTrelloItem('Unlabled', 'gray', unlabledCards.length)
+  renderTrelloItem('Unlabeled', 'gray', unlabledCards.length)
   renderTrelloItem('Total', 'black', cards.length)
 
   $('.trello__wrapper').show();
