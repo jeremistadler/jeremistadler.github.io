@@ -17,6 +17,7 @@
     "files": [
         "./defs/d3.d.ts",
         "./defs/jquery.d.ts",
-        "./main.ts"
+        "./main.ts",
+        "./uptime.ts"
     ]
 }

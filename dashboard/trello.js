@@ -40,9 +40,9 @@ Trello.get("boards/LqUUuhsu/cards", function(cards) {
       $('#trello__content').append(renderedHtml);
   }
 
-  renderTrelloItem('Low', 'rgb(232, 230, 31)', (cardsByLabel['Low'] || []).length)
-  renderTrelloItem('Normal', 'orange', (cardsByLabel['Normal'] || []).length)
-  renderTrelloItem('High', 'red', (cardsByLabel['High'] || []).length)
+  renderTrelloItem('Low', 'rgb(255, 237, 48)', (cardsByLabel['Low'] || []).length)
+  renderTrelloItem('Normal', 'rgb(255, 129, 74)', (cardsByLabel['Normal'] || []).length)
+  renderTrelloItem('High', 'rgb(252, 72, 72)', (cardsByLabel['High'] || []).length)
   renderTrelloItem('App', 'gray', (cardsByLabel['App'] || []).length)
   renderTrelloItem('Unlabeled', 'gray', unlabledCards.length)
   renderTrelloItem('Total', 'black', cards.length)

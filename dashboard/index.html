@@ -24,27 +24,33 @@
           <a id="disconnect" href="#">Log Out</a>
       </div>
   </div>
+  <div id="trello__template" class="template">
+    <div class="trello__item ">
+      <p style="color:{{color}}">{{count}}</p>
+      <h2>{{name}}</h2>
+    </div>
+  </div>
 
-  <div class="trello__wrapper">
-      <div class="card_holder card card-w15">
-        <h1 class="trello__header"><i class="fa fa-trello"></i>Trello bug board</h1>
-        <div id="trello__content"></div>
-      </div>
+<div class="card_holder">
+
+    <div class="card card-w15 trello__wrapper">
+      <h1 class="card__header card__header--trello"><i class="fa fa-trello"></i>Trello bug board</h1>
+      <div id="trello__content"></div>
     </div>
 
-      <div id="trello__template" class="template">
-        <div class="trello__item ">
-          <p style="color:{{color}}">{{count}}</p>
-          <h2>{{name}}</h2>
-        </div>
-      </div>
-
-
-    <div class="card_holder">
       <div class="card">
   		    <div id="chart1"></div>
       </div>
 
+      <div class="card">
+        <h1 class="card__header card__header--uptime"><i class="fa fa-user-times"></i>Site Uptime</h1>
+          <div id="uptimeChart"></div>
+      </div>
+
+      <div class="card">
+        <h1 class="card__header card__header--uptime"><i class="fa fa-clock-o"></i>Site Response Time</h1>
+          <div id="responseChart"></div>
+      </div>
 
       <!--<div class="card">
         <iframe src="http://kibana.pliq.se/#/visualize/create?embed&type=pie&indexPattern=speed-laget-assets-v1&_g=(refreshInterval:(display:Off,section:0,value:0),time:(from:now-7d,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'*')),vis:(aggs:!((id:'1',params:(field:size),schema:metric,type:sum),(id:'2',params:(field:parent,order:desc,orderBy:'1',size:5),schema:segment,type:terms)),listeners:(),params:(addLegend:!t,addTooltip:!t,isDonut:!t,shareYAxis:!t),type:pie))"></iframe>
@@ -85,7 +91,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.2/mustache.min.js"></script>
     <script src="https://api.trello.com/1/client.js?key=4d8b0ec515154e08b7a70c2666f34dcb"></script>
-	  <script src="trello.js"></script>
+    <script src="trello.js"></script>
+	  <script src="uptime.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
