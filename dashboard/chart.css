@@ -17,12 +17,3 @@
   stroke: rgb(200, 200, 200);
   fill: none;
 }
-
-.title{
-  text-align: center;
-  color: rgb(40, 40, 40);
-  font-size: 25px;
-  margin-top: 15px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-}

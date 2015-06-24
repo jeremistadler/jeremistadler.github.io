@@ -26,7 +26,6 @@ function buildQuery(startTime: number, endTime: number, aggs) {
   };
 }
 
-
 var timeEnd = Math.floor(new Date().getTime());
 var timeStart = timeEnd - 60 * 60 * 24 * 7 * 2 * 1000;
 
@@ -67,7 +66,7 @@ function objToArr(obj){
 var renderGraph = function(response) {
   var data = response.aggregations['1'].buckets;
 
-  var margin = {top: 5, right: 40, bottom: 40, left: 40},
+  var margin = {top: 20, right: 40, bottom: 40, left: 40},
   chartWidth = 500 - margin.left - margin.right,
   chartHeight = 200 - margin.top - margin.bottom;
 
@@ -100,12 +99,6 @@ var renderGraph = function(response) {
   .scale(yScale)
   .orient('right')
   .ticks(4);
-
-
-  d3.select("#chart1").append('div')
-  .attr('class', 'title')
-  .text('Startpage score');
-
 
   var chart = d3
   .select("#chart1")

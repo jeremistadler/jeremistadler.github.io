@@ -58,7 +58,7 @@ function objToArr(obj) {
 }
 var renderGraph = function (response) {
     var data = response.aggregations['1'].buckets;
-    var margin = { top: 5, right: 40, bottom: 40, left: 40 }, chartWidth = 500 - margin.left - margin.right, chartHeight = 200 - margin.top - margin.bottom;
+    var margin = { top: 20, right: 40, bottom: 40, left: 40 }, chartWidth = 500 - margin.left - margin.right, chartHeight = 200 - margin.top - margin.bottom;
     var barWidth = chartWidth / data.length;
     var yScale = d3.scale.linear()
         .domain([100, 30])
@@ -80,9 +80,6 @@ var renderGraph = function (response) {
         .scale(yScale)
         .orient('right')
         .ticks(4);
-    d3.select("#chart1").append('div')
-        .attr('class', 'title')
-        .text('Startpage score');
     var chart = d3
         .select("#chart1")
         .append('svg')

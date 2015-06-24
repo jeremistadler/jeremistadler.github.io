@@ -79,7 +79,7 @@ html{
 }
 
 .card__header--uptime{
-  background: #C2C2C2;
+  background: #18A535;
 }
 
 .card__header i{
@@ -100,8 +100,8 @@ html{
   font-size: 13px;
     line-height: 3px;
     font-weight: 300;
-    color: #555;
-      margin-top: -3px;
+    color: #989898;
+    margin-top: -3px;
 }
 
 .trello__item p{
