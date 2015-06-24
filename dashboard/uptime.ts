@@ -54,7 +54,7 @@ var chart = d3
 
     var timeScale = d3.time.scale()
                       .domain([minTime, maxTime])
-                      .range([0, 300]);
+                      .range([0, 270]);
 
     var i = 0;
         var bar = chart

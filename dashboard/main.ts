@@ -27,7 +27,7 @@ function buildQuery(startTime: number, endTime: number, aggs) {
 }
 
 var timeEnd = Math.floor(new Date().getTime());
-var timeStart = timeEnd - 60 * 60 * 24 * 7 * 2 * 1000;
+var timeStart = timeEnd - 60 * 60 * 24 * 7 * 4 * 1000;
 
 
 var query = buildQuery(timeStart, timeEnd,
@@ -35,7 +35,7 @@ var query = buildQuery(timeStart, timeEnd,
     "1": {
       "date_histogram": {
         "field": "Time",
-        "interval": "1h",
+        "interval": "12h",
         "pre_zone": "+02:00",
         "pre_zone_adjust_large_interval": true,
         "min_doc_count": 0,
@@ -86,7 +86,7 @@ var renderGraph = function(response) {
     .domain([90, 50])
     .range([0, 1]);
 
-  var format = d3.time.format("%a");
+  var format = d3.time.format("%d");
 
   var xAxis = d3.svg.axis()
   .scale(xScale)
@@ -127,7 +127,7 @@ var renderGraph = function(response) {
     .selectAll("div")
     .data(data)
     .enter().append('g')
-    .attr('transform', d => 'translate(' + xScale((<any>d).key) + ',0)');
+    .attr('transform', d => 'translate(' + (xScale((<any>d).key) - barWidth) + ',0)');
 
   bar.selectAll('div')
     .data(d => objToArr(d['1'].values))
@@ -139,11 +139,9 @@ var renderGraph = function(response) {
     .attr('opacity', 0.8)
 
 
-
-
     var line = d3.svg.line()
       .defined(function(d) { return !isNaN((<any>d)['1'].values['50.0']); })
-      .x(d => xScale((<any>d).key))
+      .x(d => xScale((<any>d).key) - barWidth)
       .y(d => yScale((<any>d)['1'].values['50.0']))
       .interpolate("basis");
 
@@ -151,6 +149,7 @@ var renderGraph = function(response) {
       .append("path")
       .attr("d", line(data))
       .attr('stroke', 'black')
+      .attr('fill', 'none')
       ;
 }
 

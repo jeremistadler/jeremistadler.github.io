@@ -25,12 +25,12 @@ function buildQuery(startTime, endTime, aggs) {
     };
 }
 var timeEnd = Math.floor(new Date().getTime());
-var timeStart = timeEnd - 60 * 60 * 24 * 7 * 2 * 1000;
+var timeStart = timeEnd - 60 * 60 * 24 * 5 * 4 * 1000;
 var query = buildQuery(timeStart, timeEnd, {
     "1": {
         "date_histogram": {
             "field": "Time",
-            "interval": "1h",
+            "interval": "12h",
             "pre_zone": "+02:00",
             "pre_zone_adjust_large_interval": true,
             "min_doc_count": 0,
@@ -69,7 +69,7 @@ var renderGraph = function (response) {
     var score = d3.scale.linear()
         .domain([90, 50])
         .range([0, 1]);
-    var format = d3.time.format("%a");
+    var format = d3.time.format("%d");
     var xAxis = d3.svg.axis()
         .scale(xScale)
         .orient('bottom')
@@ -99,7 +99,7 @@ var renderGraph = function (response) {
         .selectAll("div")
         .data(data)
         .enter().append('g')
-        .attr('transform', function (d) { return 'translate(' + xScale(d.key) + ',0)'; });
+        .attr('transform', function (d) { return 'translate(' + (xScale(d.key) - barWidth) + ',0)'; });
     bar.selectAll('div')
         .data(function (d) { return objToArr(d['1'].values); })
         .enter().append("rect")
@@ -110,13 +110,14 @@ var renderGraph = function (response) {
         .attr('opacity', 0.8);
     var line = d3.svg.line()
         .defined(function (d) { return !isNaN(d['1'].values['50.0']); })
-        .x(function (d) { return xScale(d.key); })
+        .x(function (d) { return xScale(d.key) - barWidth; })
         .y(function (d) { return yScale(d['1'].values['50.0']); })
         .interpolate("basis");
     chart
         .append("path")
         .attr("d", line(data))
-        .attr('stroke', 'black');
+        .attr('stroke', 'black')
+        .attr('fill', 'none');
 };
 $(function () {
     $.post('http://elastic.pliq.se/speed-laget-pages-v1/_search', JSON.stringify(query), renderGraph);
