@@ -20,15 +20,33 @@ var updateMonitorGraph = function(){
   .attr("transform", "translate(20,20)")
   ;
 
-var i = 0;
-    var bar = chart
+
+      var minTime = d3.min(json.monitors.monitor[0].log, d => format.parse(d.datetime));
+      var maxTime = d3.max(json.monitors.monitor[0].log, d => format.parse(d.datetime));
+
+  var uptimeDateScale = d3.time.scale()
+                          .domain([minTime, maxTime])
+                          .range([10, 200]);
+
+  var widthScale = d3.scale.linear()
+                     .domain([0, maxTime.getTime() - minTime.getTime()])
+                     .range([20, 50]);
+
+var logs = <any[]>json.monitors.monitor[0].log;
+logs.sort(f => format.parse(f.datetime).getTime());
+
+
+   chart
       .selectAll("div")
       .data(json.monitors.monitor[0].log)
       .enter().append('rect')
-      .attr('width', 10)
+      .attr('width', (d, i) => {
+        var nextTime = (i > logs.length - 2 ? maxTime : format.parse(logs[i + 1].datetime)).getTime()
+        var currentTime = format.parse(d.datetime).getTime();
+        return widthScale(nextTime - currentTime);
+      })
       .attr('height', 10)
-      .attr('fill', d => color(d.type))
-      .attr('transform', d => 'translate(' + (i++) * 10 + ',0)');
+      .attr('fill', d => color(d.type));
 
 
 var chart = d3
