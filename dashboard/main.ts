@@ -1,8 +1,10 @@
 /// <reference path="defs/d3.d.ts" />
 /// <reference path="defs/jquery.d.ts" />
 
-function buildQuery(startTime: number, endTime: number, aggs) {
+function buildQuery(startTime: number, endTime: number, fields) {
   return {
+    "size": 10000,
+    "fields": fields,
     "query": {
       "filtered": {
         "filter": {
@@ -20,42 +22,17 @@ function buildQuery(startTime: number, endTime: number, aggs) {
           }
         }
       }
-    },
-    "size": 0,
-    "aggs": aggs
+    }
   };
 }
 
 var timeEnd = Math.floor(new Date().getTime());
-var timeStart = timeEnd - 60 * 60 * 24 * 7 * 4 * 1000;
+var timeStart = timeEnd - 60 * 60 * 24 * 1 * 4 * 1000;
 
 
-var query = buildQuery(timeStart, timeEnd,
-  {
-    "1": {
-      "date_histogram": {
-        "field": "Time",
-        "interval": "12h",
-        "pre_zone": "+02:00",
-        "pre_zone_adjust_large_interval": true,
-        "min_doc_count": 0,
-        "extended_bounds": {
-          "min": timeStart,
-          "max": timeEnd
-        }
-      },
-      "aggs": {
-        "1": {
-          "percentiles": {
-            "field": "score",
-            "percents": [1, 5, 25, 50, 75, 95, 99]
-          }
-        }
-      }
-    }
-  });
+var query = buildQuery(timeStart, timeEnd, ['score', 'Time']);
 
-function objToArr(obj){
+function objToArr(obj) {
   var arr = [];
   for (var key in obj)
     if (!isNaN(obj[key]))
@@ -64,93 +41,95 @@ function objToArr(obj){
 }
 
 var renderGraph = function(response) {
-  var data = response.aggregations['1'].buckets;
+  var data = response.hits.hits;
 
-  var margin = {top: 20, right: 40, bottom: 40, left: 40},
-  chartWidth = 500 - margin.left - margin.right,
-  chartHeight = 200 - margin.top - margin.bottom;
+  for (let i = 0; i < data.length; i++) {
+    data[i] = {
+      time: new Date(data[i].fields.Time[0]),
+      score: data[i].fields.score[0]
+    }
+  }
 
-  var barWidth = chartWidth / data.length;
+  var margin = { top: 20, right: 40, bottom: 40, left: 40 },
+    chartWidth = 500 - margin.left - margin.right,
+    chartHeight = 200 - margin.top - margin.bottom;
 
-  var yScale = d3.scale.linear()
-    .domain([100, 30])
-    .range([0, chartHeight]);
+  /*
+    var barWidth = chartWidth / data.length;
 
-  var xScale = d3.time.scale()
-                 .range([0, chartWidth])
-                 .domain([data[0].key,data[data.length - 1].key])
-                 ;
+    var yScale = d3.scale.linear()
+      .domain([100, 30])
+      .range([0, chartHeight]);
+
+    var xScale = d3.time.scale()
+                   .range([0, chartWidth])
+                   .domain([data[0].key,data[data.length - 1].key])
+                   ;
 
 
-  var score = d3.scale.linear()
-    .domain([90, 50])
-    .range([0, 1]);
-
+    var score = d3.scale.linear()
+      .domain([90, 50])
+      .range([0, 1]);
+  */
   var format = d3.time.format("%d");
 
-  var xAxis = d3.svg.axis()
-  .scale(xScale)
-  .orient('bottom')
-  .tickFormat(format)
-  .ticks(14);
-  ;
 
-  var yAxis = d3.svg.axis()
-  .scale(yScale)
-  .orient('right')
-  .ticks(4);
+
 
   var chart = d3
-  .select("#chart1")
-  .append('svg')
-  .attr('width', chartWidth + margin.left + margin.right)
-  .attr('height', chartHeight + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-  ;
+    .select("#chart1")
+    .append('svg')
+    .attr('width', chartWidth + margin.left + margin.right)
+    .attr('height', chartHeight + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    ;
 
 
-  chart.append('g')
-  .attr("class", 'axis')
-  .attr("transform", "translate(0," + chartHeight + ")")
-  .call(xAxis);
+  var color = d3.scale.linear()
+    .domain([0, 100])
+    .range(['red', 'green']);
 
-  chart.append('g')
-  .attr("class", 'axis')
-  .attr("transform", "translate(" + chartWidth + ",0)")
-  .call(yAxis);
+  var verticalScale = d3.scale.linear()
+    .domain([0, 100])
+    .range([chartHeight, 0]);
 
+  var minTime = d3.min(data, d => d.time);
+  var maxTime = d3.max(data, d => d.time);
+  var timeScale = d3.scale.linear()
+    .domain([minTime, maxTime])
+    .range([0, chartWidth]);
 
-
-
-  var bar = chart
+  chart
     .selectAll("div")
     .data(data)
-    .enter().append('g')
-    .attr('transform', d => 'translate(' + (xScale((<any>d).key) - barWidth) + ',0)');
+    .enter().append('circle')
+    .attr('r', 3)
+    .attr('opacity', 0.1)
+    .attr('fill', d => color(d.score))
+    .attr('transform', d => 'translate(' + timeScale(d.time) + ',' + verticalScale(d.score) + ')');
 
-  bar.selectAll('div')
-    .data(d => objToArr(d['1'].values))
-    .enter().append("rect")
-    .style('height', d => '5px')
-    .style('width', (barWidth + 0.5) + 'px')
-    .style('fill', d => d3.hsl(1, 0.5, 1 - score(d.value)).toString())
-    .attr('y', d => yScale(d.value))
-    .attr('opacity', 0.8)
+  var xAxis = d3.svg.axis()
+    .scale(timeScale)
+    .orient('bottom')
+    .tickFormat(d => format(new Date(d)))
+    .ticks(14);
 
+  var yAxis = d3.svg.axis()
+    .scale(verticalScale)
+    .orient('right')
+    .ticks(4);
 
-    var line = d3.svg.line()
-      .defined(function(d) { return !isNaN((<any>d)['1'].values['50.0']); })
-      .x(d => xScale((<any>d).key) - barWidth)
-      .y(d => yScale((<any>d)['1'].values['50.0']))
-      .interpolate("basis");
+  chart.append('g')
+    .attr("class", 'axis')
+    .attr("transform", "translate(0," + chartHeight + ")")
+    .call(xAxis);
 
-      chart
-      .append("path")
-      .attr("d", line(data))
-      .attr('stroke', 'black')
-      .attr('fill', 'none')
-      ;
+  chart.append('g')
+    .attr("class", 'axis')
+    .attr("transform", "translate(" + chartWidth + ",0)")
+    .call(yAxis);
+
 }
 
 $(function() {

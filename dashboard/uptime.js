@@ -21,7 +21,7 @@ var drawResponseGraph = function (data) {
         .selectAll("div")
         .data(data)
         .enter().append('circle')
-        .attr('r', 3)
+        .attr('r', 2)
         .attr('fill', function (d) { return color(d.value); })
         .attr('transform', function (d) { return 'translate(' + timeScale(d.datetime) + ',' + verticalScale(d.value) + ')'; });
 };

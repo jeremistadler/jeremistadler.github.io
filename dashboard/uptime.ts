@@ -30,7 +30,7 @@ var drawResponseGraph = function(data) {
     .selectAll("div")
     .data(data)
     .enter().append('circle')
-    .attr('r', 3)
+    .attr('r', 2)
     .attr('fill', d => color(d.value))
     .attr('transform', d => 'translate(' + timeScale(d.datetime) + ',' + verticalScale(d.value) + ')');
 

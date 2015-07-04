@@ -1,7 +1,9 @@
 /// <reference path="defs/d3.d.ts" />
 /// <reference path="defs/jquery.d.ts" />
-function buildQuery(startTime, endTime, aggs) {
+function buildQuery(startTime, endTime, fields) {
     return {
+        "size": 10000,
+        "fields": fields,
         "query": {
             "filtered": {
                 "filter": {
@@ -19,36 +21,12 @@ function buildQuery(startTime, endTime, aggs) {
                     }
                 }
             }
-        },
-        "size": 0,
-        "aggs": aggs
+        }
     };
 }
 var timeEnd = Math.floor(new Date().getTime());
-var timeStart = timeEnd - 60 * 60 * 24 * 5 * 4 * 1000;
-var query = buildQuery(timeStart, timeEnd, {
-    "1": {
-        "date_histogram": {
-            "field": "Time",
-            "interval": "12h",
-            "pre_zone": "+02:00",
-            "pre_zone_adjust_large_interval": true,
-            "min_doc_count": 0,
-            "extended_bounds": {
-                "min": timeStart,
-                "max": timeEnd
-            }
-        },
-        "aggs": {
-            "1": {
-                "percentiles": {
-                    "field": "score",
-                    "percents": [1, 5, 25, 50, 75, 95, 99]
-                }
-            }
-        }
-    }
-});
+var timeStart = timeEnd - 60 * 60 * 24 * 1 * 4 * 1000;
+var query = buildQuery(timeStart, timeEnd, ['score', 'Time']);
 function objToArr(obj) {
     var arr = [];
     for (var key in obj)
@@ -57,29 +35,15 @@ function objToArr(obj) {
     return arr;
 }
 var renderGraph = function (response) {
-    var data = response.aggregations['1'].buckets;
+    var data = response.hits.hits;
+    for (var i = 0; i < data.length; i++) {
+        data[i] = {
+            time: new Date(data[i].fields.Time[0]),
+            score: data[i].fields.score[0]
+        };
+    }
     var margin = { top: 20, right: 40, bottom: 40, left: 40 }, chartWidth = 500 - margin.left - margin.right, chartHeight = 200 - margin.top - margin.bottom;
-    var barWidth = chartWidth / data.length;
-    var yScale = d3.scale.linear()
-        .domain([100, 30])
-        .range([0, chartHeight]);
-    var xScale = d3.time.scale()
-        .range([0, chartWidth])
-        .domain([data[0].key, data[data.length - 1].key]);
-    var score = d3.scale.linear()
-        .domain([90, 50])
-        .range([0, 1]);
     var format = d3.time.format("%d");
-    var xAxis = d3.svg.axis()
-        .scale(xScale)
-        .orient('bottom')
-        .tickFormat(format)
-        .ticks(14);
-    ;
-    var yAxis = d3.svg.axis()
-        .scale(yScale)
-        .orient('right')
-        .ticks(4);
     var chart = d3
         .select("#chart1")
         .append('svg')
@@ -87,6 +51,34 @@ var renderGraph = function (response) {
         .attr('height', chartHeight + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var color = d3.scale.linear()
+        .domain([0, 100])
+        .range(['red', 'green']);
+    var verticalScale = d3.scale.linear()
+        .domain([0, 100])
+        .range([chartHeight, 0]);
+    var minTime = d3.min(data, function (d) { return d.time; });
+    var maxTime = d3.max(data, function (d) { return d.time; });
+    var timeScale = d3.scale.linear()
+        .domain([minTime, maxTime])
+        .range([0, chartWidth]);
+    chart
+        .selectAll("div")
+        .data(data)
+        .enter().append('circle')
+        .attr('r', 3)
+        .attr('opacity', 0.1)
+        .attr('fill', function (d) { return color(d.score); })
+        .attr('transform', function (d) { return 'translate(' + timeScale(d.time) + ',' + verticalScale(d.score) + ')'; });
+    var xAxis = d3.svg.axis()
+        .scale(timeScale)
+        .orient('bottom')
+        .tickFormat(function (d) { return format(new Date(d)); })
+        .ticks(14);
+    var yAxis = d3.svg.axis()
+        .scale(verticalScale)
+        .orient('right')
+        .ticks(4);
     chart.append('g')
         .attr("class", 'axis')
         .attr("transform", "translate(0," + chartHeight + ")")
@@ -95,29 +87,6 @@ var renderGraph = function (response) {
         .attr("class", 'axis')
         .attr("transform", "translate(" + chartWidth + ",0)")
         .call(yAxis);
-    var bar = chart
-        .selectAll("div")
-        .data(data)
-        .enter().append('g')
-        .attr('transform', function (d) { return 'translate(' + (xScale(d.key) - barWidth) + ',0)'; });
-    bar.selectAll('div')
-        .data(function (d) { return objToArr(d['1'].values); })
-        .enter().append("rect")
-        .style('height', function (d) { return '5px'; })
-        .style('width', (barWidth + 0.5) + 'px')
-        .style('fill', function (d) { return d3.hsl(1, 0.5, 1 - score(d.value)).toString(); })
-        .attr('y', function (d) { return yScale(d.value); })
-        .attr('opacity', 0.8);
-    var line = d3.svg.line()
-        .defined(function (d) { return !isNaN(d['1'].values['50.0']); })
-        .x(function (d) { return xScale(d.key) - barWidth; })
-        .y(function (d) { return yScale(d['1'].values['50.0']); })
-        .interpolate("basis");
-    chart
-        .append("path")
-        .attr("d", line(data))
-        .attr('stroke', 'black')
-        .attr('fill', 'none');
 };
 $(function () {
     $.post('http://elastic.pliq.se/speed-laget-pages-v1/_search', JSON.stringify(query), renderGraph);
