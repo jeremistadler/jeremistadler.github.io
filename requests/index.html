@@ -32,14 +32,16 @@
             top: 0;
             left: 0;
             position: absolute;
-
+            max-width: 30%;
           }
 
           .righttop{
             top: 0;
             right: 0;
             position: absolute;
+            max-width: 30%;
           }
+
 
         </style>
     </head>
@@ -98,8 +100,8 @@
           for (var i = 0; i < data.length; i++) {
              if (data[i] == 0){
                items.push({
-                 x: canvas.width - 130,
-                 y: 20 + Math.random() * 200,
+                 x: canvas.width,
+                 y: Math.random() * 200,
                  vX: -(Math.random() * 0.8 + Math.random() * 0.3 + 1),
                  vY: Math.random() * 0.2 + 0.1,
                  age: 0,
@@ -109,8 +111,8 @@
              }
              else{
                items.push({
-                 x: 130,
-                 y: 100 + Math.random() * 50,
+                 x: 0,
+                 y: 0 + Math.random() * 50,
                  vX: Math.random() * 0.8 + Math.random() * 0.3 + 1,
                  vY: Math.random() * 0.2 + 0.1,
                  age: 0,
