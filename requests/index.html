@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Requests</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+
+          html, body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: transparent;
+          }
+
+          html{
+            background: url('http://cdn1.bestpsdfreebies.com/wp-content/uploads/2014/05/Part-1-Background-5-without-Glare.jpg') no-repeat center center fixed;
+            background-size: cover;
+          }
+
+          .fill{
+            position: absolute;
+            left: 0;
+            right: 0;
+            left: 0;
+            top: 0;
+          }
+
+          .lefttop{
+            top: 0;
+            left: 0;
+            position: absolute;
+
+          }
+
+          .righttop{
+            top: 0;
+            right: 0;
+            position: absolute;
+          }
+
+        </style>
+    </head>
+    <body>
+      <canvas class="fill" id="mainCanvas"></canvas>
+      <img src="fel.png" class="lefttop" />
+      <img src="ok.png" class="righttop" />
+
+      <script>
+        var canvas = document.getElementById('mainCanvas');
+        var ctx = canvas.getContext('2d', {alpha: true});
+
+        var tint = function(r, g, b, image){
+          var c = document.createElement('canvas');
+          c.width = image.width;
+          c.height = image.height;
+          var cx = c.getContext('2d', {alpha: true});
+
+          cx.drawImage(image, 0, 0);
+          var data = cx.getImageData(0, 0, image.width, image.height);
+          var pixels = data.data;
+          var numPixels = pixels.length;
+          for (var i = 0; i < numPixels; i++) {
+            pixels[i*4+0] = r * pixels[i*4+3];
+            pixels[i*4+1] = g * pixels[i*4+3];
+            pixels[i*4+2] = b * pixels[i*4+3];
+          }
+          cx.putImageData(data, 0, 0);
+          return c;
+        }
+
+        var red = null;
+        var green = null;
+        var blue = null;
+        var black = null;
+
+        window.onresize = function(){
+          canvas.width = document.body.clientWidth;
+          canvas.height = document.body.clientHeight;
+        }
+        canvas.width = document.body.clientWidth;
+        canvas.height = document.body.clientHeight;
+
+        var requestImg = new Image();
+        requestImg.onload = function(){
+          red = tint(1, 0, 0, requestImg);
+          green = tint(0, 1, 0, requestImg);
+          blue = tint(0.2, 0.4, 1, requestImg);
+          black = requestImg;
+        }
+        requestImg.src = 'dropplet.png';
+
+        var items = [];
+
+        var onDataReceived = function(data){
+          for (var i = 0; i < data.length; i++) {
+             if (data[i] == 0){
+               items.push({
+                 x: canvas.width - 130,
+                 y: 20 + Math.random() * 200,
+                 vX: -(Math.random() * 0.8 + Math.random() * 0.3 + 1),
+                 vY: Math.random() * 0.2 + 0.1,
+                 age: 0,
+                 size: Math.random() * 8 + 12,
+                 image: blue
+                });
+             }
+             else{
+               items.push({
+                 x: 130,
+                 y: 100 + Math.random() * 50,
+                 vX: Math.random() * 0.8 + Math.random() * 0.3 + 1,
+                 vY: Math.random() * 0.2 + 0.1,
+                 age: 0,
+                 size: Math.random() * 8 + 12,
+                 image: red
+                });
+             }
+          }
+        }
+
+        window.setInterval(function() {
+            onDataReceived([0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
+        }, 1000)
+
+        var lastTimestamp = 0;
+
+        function clamp(value, min, max) {
+          if (typeof min == 'undefined') min = 0;
+          if (typeof max == 'undefined') max = 1;
+          return Math.min(Math.max(value, min), max);
+        }
+
+        function draw(timestamp) {
+            requestAnimationFrame(draw);
+
+            var timeDiff = timestamp - lastTimestamp;
+            lastTimestamp = timestamp;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (var i = 0; i < items.length; i++) {
+              items[i].x += items[i].vX * timeDiff * 0.1;
+              items[i].y += items[i].vY * timeDiff * 0.1;
+              items[i].vY += 0.001 * timeDiff;
+              items[i].age += timeDiff;
+            }
+
+            for (var i = 0; i < items.length; i++) {
+              if (items[i].x > canvas.width + 100 || items[i].y > canvas.height + 100 || items[i].x < -500 || items[i].y < -500){
+                items.splice(i, 1);
+                i--;
+              }
+            }
+
+            for (var i = 0; i < items.length; i++) {
+              var angle = Math.atan2(items[i].vY, items[i].vX) - Math.PI / 2;
+
+              ctx.translate(items[i].x - items[i].size * 0.5, items[i].y - items[i].size * 0.5);
+              ctx.rotate(angle);
+              ctx.globalAlpha = clamp(clamp(items[i].age / 300) - 0.4);
+
+              ctx.drawImage(items[i].image, -items[i].size * 0.5, -items[i].size * 0.5, items[i].size, items[i].size * 1.4);
+
+              ctx.rotate(-angle);
+              ctx.translate(-(items[i].x - items[i].size * 0.5), -(items[i].y - items[i].size * 0.5));
+            }
+        }
+        draw();
+
+      </script>
+    </body>
+</html>
