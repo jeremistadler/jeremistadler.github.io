@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Dashboard - laget.se</title>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/elasticsearch/9.0.0/elasticsearch.min.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+
+	<style>
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+			background: #000;
+			font-family: 'Roboto', 'Arial';
+		}
+
+		#aa{
+			width: 750px;
+			margin: 20px auto;
+		}
+
+	.axis path,
+		.axis line {
+			fill: none;
+			stroke: #000;
+			shape-rendering: crispEdges;
+		}
+
+		.x.axis path {
+			display: none;
+		}
+
+		.line {
+			fill: none;
+			stroke-width: 1.5px;
+			stroke: steelblue;
+		}
+
+		.line2 {
+			fill: none;
+			opacity: 0.6;
+			stroke: #bbb;
+			stroke-width: 1px;
+		}
+
+		.teext {
+			fill: #ABABAB;
+			font-size: 12px;
+		}
+	</style>
+
+	<script>
+		var updateChart = function(elm) {
+			var dateEnd = new Date().getTime();
+			var dateStart = dateEnd - 1000 * 60 * 60 * 24 * 30;
+			var samples = 400;
+			var secondsPerSample = ((dateEnd - dateStart) / 1000) / samples;
+
+			var query = {
+				"size": 0,
+				"query": {
+					"filtered": {
+						"filter": {
+							"range": {
+								"time": {
+									"gte": dateStart,
+									"lte": dateEnd
+								}
+							}
+						}
+					}
+				},
+				"aggs": {
+					"routes": {
+						"terms": {
+							"field": "route",
+							"size": 70,
+							"order": {
+								"_count": "desc"
+							}
+						},
+						"aggs": {
+							"dates": {
+								"date_histogram": {
+									"field": "time",
+									"interval": secondsPerSample + "s",
+									"pre_zone": "+01:00",
+									"pre_zone_adjust_large_interval": true,
+									"min_doc_count": 0,
+									"extended_bounds": {
+										"min": dateStart,
+										"max": dateEnd
+									}
+								},
+								"aggs": {
+									"times": {
+										"avg": {
+											"field": "processTime"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			};
+
+
+			var client = new elasticsearch.Client({
+				host: 'http://elastic.laget.se/'
+			});
+			client.search({
+				index: 'requests-*',
+				size: 0,
+				body: query
+			}).then(function(resp) {
+				console.log(resp);
+				draw(resp.aggregations.routes.buckets, dateStart, dateEnd, elm)
+			});
+		}
+
+		var defaultDrawOptions = {
+			localRelativeY: false,
+			minTime: new Date().getTime() - 1000 * 60 * 60,
+			maxTime: new Date().getTime(),
+			selector: 'route'
+		}
+
+		var draw = function(data, dateStart, dateEnd, elm) {
+			var margin = {
+					top: 20,
+					right: 0,
+					bottom: 500,
+					left: 0
+				},
+				width = 750 - margin.left - margin.right,
+				height = data.length * 30 - margin.top - margin.bottom;
+
+			var x = d3.time.scale()
+				.range([0, width]);
+
+			//var y = d3.scale.pow().exponent(0.1)
+			var y = d3.scale.linear()
+				.range([height / data.length, 0]);
+
+			var xAxis = d3.svg.axis()
+				.scale(x)
+				.orient("top")
+				.tickFormat(d3.time.format("%H:%M"));
+
+			elm.innerHTML = '';
+			var svg = d3.select(elm).append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+			var processTimeMax = d3.max(data, function(d) {
+				return d3.max(d.dates.buckets, function(q) {
+					return q.times.value
+				})
+			})
+
+			x.domain([dateStart, dateEnd]);
+			y.domain(d3.extent([0, processTimeMax]));
+
+			svg.append("g")
+				.attr("class", "x axis")
+				.attr("transform", "translate(0,1)")
+				.call(xAxis);
+
+			var spacing = 1.8;
+
+			var opacityScale = d3.scale.linear()
+				.domain([data.length, 0])
+				.range([1, 1]);
+
+			for (var i = data.length - 1; i >= 0; i--) {
+				processTimeMax = d3.max(data[i].dates.buckets, function(q) {
+					return q.times.value
+				})
+				y.domain(d3.extent([0, processTimeMax]));
+
+				var line = d3.svg.line()
+					.x(function(d) {
+						return x(d.key);
+					})
+					.y(function(d) {
+						return y(d.times.value);
+					});
+
+				svg.append("text")
+					.attr("x", 0)
+					.attr("y", function(d) {
+						return ((i * spacing) * (height / data.length) + 10);
+					})
+					.attr("alignment-baseline", "top")
+					.attr("class", "teext")
+					.text(data[i].key);
+
+
+				svg.append("path")
+					.datum(data[i].dates.buckets)
+					.attr("transform", "translate(0," + ((i * spacing) * (height / data.length) + 15) + ")")
+					.attr("class", "line")
+					.attr("d", line)
+					.attr('opacity', function() {
+						return opacityScale(i)
+					})
+
+				processTimeMax = d3.max(data[i].dates.buckets, function(q) {
+					return q.doc_count
+				})
+				y.domain(d3.extent([0, processTimeMax]));
+
+				var line = d3.svg.line()
+					.x(function(d) {
+						return x(d.key);
+					})
+					.y(function(d) {
+						return y(d.doc_count);
+					});
+
+				svg.append("path")
+					.datum(data[i].dates.buckets)
+					.attr("transform", "translate(0," + ((i * spacing) * (height / data.length) + 15) + ")")
+					.attr("class", "line2")
+					.attr("d", line);
+			}
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+		  updateChart(document.getElementById('aa'))
+		})
+	</script>
+</head>
+
+<body>
+
+<div>
+	<div id="aa"></div>
+</div>
+
+
+
+
+</body>
+
+</html>
