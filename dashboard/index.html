@@ -8,13 +8,7 @@
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 
 	<style>
-		html,
-		body {
-			margin: 0;
-			padding: 0;
-			background: #000;
-			font-family: 'Roboto', 'Arial';
-		}
+
 
 		#aa{
 			width: 750px;
@@ -33,16 +27,15 @@
 		}
 
 		.line {
-			fill: none;
-			stroke-width: 1.5px;
-			stroke: steelblue;
+			fill: #f1c40f;
+			stroke-width: 0px;
 		}
 
 		.line2 {
 			fill: none;
-			opacity: 0.6;
-			stroke: #bbb;
-			stroke-width: 1px;
+			opacity: 0;
+			stroke: #111;
+			stroke-width: 6px;
 		}
 
 		.teext {
@@ -53,9 +46,10 @@
 
 	<script>
 		var updateChart = function(elm) {
-			var dateEnd = new Date().getTime();
+			var dateEnd = new Date().getTime() - 1000 * 10;
 			var dateStart = dateEnd - 1000 * 60 * 60 * 24 * 30;
-			var samples = 400;
+			dateStart = dateEnd - 1000 * 60 * 60 * 10;
+			var samples = 8;
 			var secondsPerSample = ((dateEnd - dateStart) / 1000) / samples;
 
 			var query = {
@@ -75,8 +69,8 @@
 				"aggs": {
 					"routes": {
 						"terms": {
-							"field": "route",
-							"size": 70,
+							"field": "environment",
+							"size": 1,
 							"order": {
 								"_count": "desc"
 							}
@@ -129,21 +123,23 @@
 		}
 
 		var draw = function(data, dateStart, dateEnd, elm) {
+			elm.innerHtml = '';
 			var margin = {
-					top: 20,
+					top: 0,
 					right: 0,
-					bottom: 500,
+					bottom: 0,
 					left: 0
 				},
 				width = 750 - margin.left - margin.right,
-				height = data.length * 30 - margin.top - margin.bottom;
+				// height = data.length * 30 - margin.top - margin.bottom;
+				height = 250;
 
 			var x = d3.time.scale()
-				.range([0, width]);
+				.range([0, width + 50]);
 
 			//var y = d3.scale.pow().exponent(0.1)
 			var y = d3.scale.linear()
-				.range([height / data.length, 0]);
+				.range([height - 20, 0]);
 
 			var xAxis = d3.svg.axis()
 				.scale(x)
@@ -154,8 +150,8 @@
 			var svg = d3.select(elm).append("svg")
 				.attr("width", width + margin.left + margin.right)
 				.attr("height", height + margin.top + margin.bottom)
-				.append("g")
-				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+				.append("g");
+
 
 			var processTimeMax = d3.max(data, function(d) {
 				return d3.max(d.dates.buckets, function(q) {
@@ -166,40 +162,43 @@
 			x.domain([dateStart, dateEnd]);
 			y.domain(d3.extent([0, processTimeMax]));
 
-			svg.append("g")
-				.attr("class", "x axis")
-				.attr("transform", "translate(0,1)")
-				.call(xAxis);
+			// svg.append("g")
+			// 	.attr("class", "x axis")
+			// 	.attr("transform", "translate(0,1)")
+			// 	.call(xAxis);
 
-			var spacing = 1.8;
+			var spacing = 0.4;
 
 			var opacityScale = d3.scale.linear()
 				.domain([data.length, 0])
 				.range([1, 1]);
 
 			for (var i = data.length - 1; i >= 0; i--) {
-				processTimeMax = d3.max(data[i].dates.buckets, function(q) {
-					return q.times.value
-				})
-				y.domain(d3.extent([0, processTimeMax]));
+				// processTimeMax = d3.max(data[i].dates.buckets, function(q) {
+				// 	return q.times.value
+				// })
+				// y.domain(d3.extent([0, processTimeMax]));
 
-				var line = d3.svg.line()
+
+				// svg.append("text")
+				// 	.attr("x", 0)
+				// 	.attr("y", function(d) {
+				// 		return ((i * spacing) * (height / data.length) + 10);
+				// 	})
+				// 	.attr("alignment-baseline", "top")
+				// 	.attr("class", "teext")
+				// 	.text(data[i].key);
+
+
+				var line = d3.svg.area()
+					//.interpolate("basis")
 					.x(function(d) {
 						return x(d.key);
 					})
-					.y(function(d) {
+					.y0(height)
+					.y1(function(d) {
 						return y(d.times.value);
 					});
-
-				svg.append("text")
-					.attr("x", 0)
-					.attr("y", function(d) {
-						return ((i * spacing) * (height / data.length) + 10);
-					})
-					.attr("alignment-baseline", "top")
-					.attr("class", "teext")
-					.text(data[i].key);
-
 
 				svg.append("path")
 					.datum(data[i].dates.buckets)
@@ -210,17 +209,19 @@
 						return opacityScale(i)
 					})
 
-				processTimeMax = d3.max(data[i].dates.buckets, function(q) {
-					return q.doc_count
-				})
-				y.domain(d3.extent([0, processTimeMax]));
-
+				// processTimeMax = d3.max(data[i].dates.buckets, function(q) {
+				// 	return q.doc_count
+				// })
+				// y.domain(d3.extent([0, processTimeMax]));
+				//
 				var line = d3.svg.line()
+					.interpolate("basis")
 					.x(function(d) {
 						return x(d.key);
 					})
 					.y(function(d) {
-						return y(d.doc_count);
+						return y(d.times.value);
+						//return y(d.doc_count);
 					});
 
 				svg.append("path")
@@ -232,20 +233,93 @@
 		}
 
 		document.addEventListener('DOMContentLoaded', function() {
-		  updateChart(document.getElementById('aa'))
+			updateChart(document.getElementById('aa'))
 		})
 	</script>
+
+<style>
+@font-face {
+	  font-family: 'ProximaNova';
+	  src: url('https://content.laget.se/public/Font/2C6B48_7_0.eot');
+	  src: url('https://content.laget.se/public/Font/2C6B48_7_0.eot?#iefix') format('embedded-opentype'),
+	       url('https://content.laget.se/public/Font/2C6B48_7_0.woff2') format('woff2'),
+	       url('https://content.laget.se/public/Font/2C6B48_7_0.woff') format('woff'),
+	       url('https://content.laget.se/public/Font/2C6B48_7_0.ttf') format('truetype');
+      font-weight: normal;
+	  font-style: normal;
+
+	}
+	@font-face {
+	  font-family: 'ProximaNova';
+	  src: url('https://content.laget.se/public/Font/2C6B48_8_0.eot');
+	  src: url('https://content.laget.se/public/Font/2C6B48_8_0.eot?#iefix') format('embedded-opentype'),
+	       url('https://content.laget.se/public/Font/2C6B48_8_0.woff2') format('woff2'),
+	       url('https://content.laget.se/public/Font/2C6B48_8_0.woff') format('woff'),
+	       url('https://content.laget.se/public/Font/2C6B48_8_0.ttf') format('truetype');
+      font-weight: bold;
+	  font-style: normal;
+	}
+
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		background: #2E2D35;
+		background: radial-gradient(ellipse at center, #1d1f36 0%, #151823 100%);
+		font-family: 'ProximaNova', 'Roboto', 'Arial';
+		color: #eee;
+		height: 100%;
+	}
+
+	.container{
+		width: 90%;
+		margin: 50px auto;
+	}
+
+	.box{
+		background: rgba(255,255,255, 0.1);
+		border-radius: 3px;
+		margin: 20px;
+		box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.28);
+		padding: 10px;
+		box-sizing: border-box;
+	}
+
+	.row_full{
+		width: 100%;
+	}
+
+	.row_half{
+		width: 50%;
+	}
+
+
+	.box_half {
+		width: 50%;
+	}
+
+	.col_full {
+		height: 300px;
+	}
+
+
+</style>
 </head>
 
 <body>
 
-<div>
-	<div id="aa"></div>
-</div>
+	<div class="container">
+		<div class="row_full">
+			<div class="box col_full">
+				<div id="aa"></div>
+		</div>
+		</div>
 
+		<div class="row_half">
+			<div class="box col_full">asd</div>
+			<div class="box col_full">asd</div>
+		</div>
 
-
-
+	</div>
 </body>
-
 </html>
