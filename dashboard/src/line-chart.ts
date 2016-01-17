@@ -29,6 +29,12 @@ var drawLine = function(chart: LineSettings) {
 	 	.attr("class", "box__title")
 	 	.html(chart.header);
 
+	d3.select(chart.elm)
+		.append("p")
+		.attr("class", "box__subtitle")
+		.html(chart.lines[0].data.map(f => f.key).join(', '));
+
+
 	var svg = d3.select(chart.elm)
 		.attr("class", "box")
 		.append("svg")
@@ -53,8 +59,8 @@ var drawLine = function(chart: LineSettings) {
 	for (let ww = 0; ww < chart.lines.length; ww++) {
 	    var lineConfig = chart.lines[ww];
 
-		var max = d3.max(lineConfig.data, (d:any) => d3.max(d.dates.buckets, (q:any) => q.times.value));
-		var min = d3.min(lineConfig.data, (d:any) => d3.min(d.dates.buckets, (q:any) => q.times.value));
+		var max = d3.max(lineConfig.data, (d:any) => d3.max(d.dates.buckets, (q:any) => q.doc_count));
+		var min = d3.min(lineConfig.data, (d:any) => d3.min(d.dates.buckets, (q:any) => q.doc_count));
 
 
 		var x = d3.time.scale()
@@ -69,7 +75,8 @@ var drawLine = function(chart: LineSettings) {
 			var line = d3.svg.line()
 				//.interpolate("basis")
 				.x(function(d:any) { return x(d.key); })
-				.y(function(d:any) { return y(d.times.value); });
+				//.y(function(d:any) { return y(d.times.value); });
+				.y(function(d:any) { return y(d.doc_count); });
 
 			svg.append("path")
 				.datum(lineConfig.data[i].dates.buckets)

@@ -25,7 +25,7 @@ var createRequestsChart = function(hours, selector, header){
         selector: selector,
         start: dateStart,
         end: dateEnd,
-        samples: 10,
+        samples: 15,
         groups: 1,
         onComplete: onFetched
     });
@@ -35,7 +35,7 @@ var createRequestsChart = function(hours, selector, header){
 document.addEventListener('DOMContentLoaded', function() {
     var container = document.getElementById('container-js');
     container.appendChild(createRequestsChart(1, 'environment', 'All Requests'));
-    container.appendChild(createRequestsChart(1, 'route', 'Top routes'));
-    container.appendChild(createRequestsChart(1, 'url', 'Top Urls'));
-    container.appendChild(createRequestsChart(1, 'siteName', 'Top Sites'));
+    container.appendChild(createRequestsChart(1, 'route', 'Top route'));
+    container.appendChild(createRequestsChart(1, 'url', 'Top Url'));
+    container.appendChild(createRequestsChart(1, 'siteName', 'Top Site'));
 })
