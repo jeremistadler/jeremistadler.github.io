@@ -1,0 +1,25 @@
+{
+    "buildOnSave": true,
+    "compileOnSave": true,
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "out": "dist/app.js",
+        "sourceMap": true
+    },
+    "filesGlob": [
+        "src/*.ts",
+        "typings/*.ts"
+    ],
+    "files": [
+        "src/app.ts",
+        "src/elasticHelper.ts",
+        "src/line-chart.ts",
+        "typings/tsd.d.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
+}

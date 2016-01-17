@@ -1,0 +1,57 @@
+@font-face {
+    font-family: 'ProximaNova';
+    src: url('https://content.laget.se/public/Font/2C6B48_7_0.eot');
+    src: url('https://content.laget.se/public/Font/2C6B48_7_0.eot?#iefix') format('embedded-opentype'), url('https://content.laget.se/public/Font/2C6B48_7_0.woff2') format('woff2'), url('https://content.laget.se/public/Font/2C6B48_7_0.woff') format('woff'), url('https://content.laget.se/public/Font/2C6B48_7_0.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ProximaNova';
+    src: url('https://content.laget.se/public/Font/2C6B48_8_0.eot');
+    src: url('https://content.laget.se/public/Font/2C6B48_8_0.eot?#iefix') format('embedded-opentype'), url('https://content.laget.se/public/Font/2C6B48_8_0.woff2') format('woff2'), url('https://content.laget.se/public/Font/2C6B48_8_0.woff') format('woff'), url('https://content.laget.se/public/Font/2C6B48_8_0.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #2E2D35;
+    background: radial-gradient(ellipse at center, #1d1f36 0%, #151823 100%);
+    font-family: 'ProximaNova', 'Roboto', 'Arial';
+    color: #eee;
+    height: 100%;
+}
+.container {
+    width: 90%;
+    margin: 50px auto;
+}
+.box {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+}
+.box__title {
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    opacity: 0.9;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+.line {
+    fill: none;
+    stroke: #f1c40f;
+    stroke-width: 2px;
+}
+
+.debugSvg {
+    fill: green;
+    opacity: 0.1;
+    /*opacity: 0;*/
+}
+.debugSvgInner {
+    fill: green;
+    opacity: 0.1;
+    /*opacity: 0;*/
+}
