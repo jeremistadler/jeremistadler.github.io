@@ -16,8 +16,9 @@
     "files": [
         "src/app.ts",
         "src/elasticHelper.ts",
+        "src/fetch-long-requests.ts",
         "src/line-chart.ts",
-        "typings/tsd.d.ts"
+        "src/timeline-chart.ts"
     ],
     "atom": {
         "rewriteTsconfig": true

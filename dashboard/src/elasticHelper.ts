@@ -2,9 +2,34 @@ interface ElasticDateAggregationRequest {
     start: number,
     end: number,
     selector: string,
-    onComplete: (data:any, request: ElasticDateAggregationRequest) => void,
     samples: number,
     groups: number,
+}
+
+interface Dataset {
+  x: number[];
+  y: number[];
+}
+
+interface NamedDataset extends Dataset {
+  name: string;
+}
+
+
+interface Timeline
+{
+  start: number;
+  end: number;
+  name: string;
+}
+
+interface TimelineChart extends Chart
+{
+  lines: Timeline[];
+}
+
+interface Chart{
+  name: string;
 }
 
 var fetchRequests = function(request: ElasticDateAggregationRequest) {
@@ -64,7 +89,7 @@ var fetchRequests = function(request: ElasticDateAggregationRequest) {
     });
 
     client.search({
-        index: ElasticHelper.getIndicesNames('requests'),
+        index: ElasticHelper.getDateIndexNames('requests-', new Date(request.start), new Date(request.end)),
         size: 0,
         body: query
     }).then(function(resp) {
@@ -74,7 +99,7 @@ var fetchRequests = function(request: ElasticDateAggregationRequest) {
 }
 
 class ElasticHelper {
-    static getIndicesName(name: string, date: Date){
+    static appendDate(name: string, date: Date) : string {
         var month = '' + (date.getMonth() + 1);
         var day = '' + date.getDate();
         var year = date.getFullYear();
@@ -82,14 +107,15 @@ class ElasticHelper {
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
 
-        return name + '-' + [year, month, day].join('-');
+        return name + [year, month, day].join('-');
     }
 
-    static getIndicesNames(name: string){
-        var now = new Date();
-        return [
-            ElasticHelper.getIndicesName(name, now),
-            ElasticHelper.getIndicesName(name, new Date(now.getTime() - 1000 * 60 * 60 * 24))
-        ].join(',')
+    static getDateIndexNames(name: string, startDate: Date, endDate: Date){
+        var indices = [];
+        while (startDate < endDate) {
+            indices.push(ElasticHelper.appendDate(name, startDate));
+            startDate = new Date(startDate.getTime() + 1000 * 60 * 60 * 24);
+        }
+        return indices.join(',')
     }
 }
