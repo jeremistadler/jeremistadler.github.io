@@ -15,10 +15,12 @@
     ],
     "files": [
         "src/app.ts",
+        "src/chartTypes.ts",
         "src/elasticHelper.ts",
         "src/fetch-long-requests.ts",
         "src/line-chart.ts",
-        "src/timeline-chart.ts"
+        "src/timeline-chart.ts",
+        "typings/tsd.d.ts"
     ],
     "atom": {
         "rewriteTsconfig": true

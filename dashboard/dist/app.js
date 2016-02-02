@@ -1,28 +1,84 @@
+var Chart = (function () {
+    function Chart(parent) {
+        this.onDataFetch = [];
+        this.elm = document.createElement('div');
+        parent.appendChild(this.elm);
+    }
+    Chart.prototype.addHeader = function (text) {
+        d3.select(this.elm)
+            .append("p")
+            .attr("class", "box__title")
+            .html(text);
+        return this;
+    };
+    Chart.prototype.addLine = function (start, end, selector) {
+        var g = d3.select(this.elm)
+            .append("g");
+        this.onDataFetch.push({
+            g: g,
+            fun: function (g) {
+                var request = {
+                    selector: selector,
+                    start: start,
+                    end: end,
+                    samples: 100,
+                    groups: 2,
+                };
+                fetchRequests(request).then(function (data) {
+                    g.selectAll('*').remove();
+                    drawLine({
+                        elm: g,
+                        start: start,
+                        end: end,
+                        smooth: true,
+                        width: 300,
+                        height: 200,
+                        lines: data.map(function (line) { return ({
+                            name: line.key,
+                            points: line.dates.buckets.map(function (x) { return ({
+                                x: x.key,
+                                y: x.times.value,
+                            }); })
+                        }); })
+                    });
+                });
+            }
+        });
+        return this;
+    };
+    Chart.prototype.fetch = function () {
+        for (var i = 0; i < this.onDataFetch.length; i++)
+            this.onDataFetch[i].fun(this.onDataFetch[i].g);
+        return this;
+    };
+    return Chart;
+}());
 var createRequestsChart = function (hours, selector, header) {
     var elm = document.createElement('div');
-    var oneMinute = 60 * 1000;
-    var oneHour = oneMinute * 60;
-    var dateEnd = new Date().getTime() - oneMinute;
-    var dateStart = dateEnd - oneHour * hours;
     var onFetched = function (data, settings) {
+        elm.innerHTML = '';
         drawLine({
-            header: header,
-            elm: elm,
-            lines: [
-                {
-                    start: dateStart,
-                    end: dateEnd,
-                    data: data
-                }
-            ]
+            elm: d3.select(elm).append('g'),
+            start: dateStart,
+            end: dateEnd,
+            smooth: true,
+            width: 300,
+            height: 200,
+            lines: data.map(function (line) { return ({
+                name: line.key,
+                points: line.dates.buckets.map(function (x) { return ({
+                    x: x.key,
+                    y: x.times.value,
+                }); })
+            }); })
         });
     };
     fetchRequests({
         selector: selector,
         start: dateStart,
         end: dateEnd,
-        samples: 15,
-        groups: 1,
+        samples: 30,
+        groups: 3,
         onComplete: onFetched,
         xSelector: function (d) { return d; },
         ySelector: function (d) { return d; },
@@ -36,7 +92,6 @@ var createLongRequestChart = function (header) {
     var dateStart = dateEnd - 1000 * 60 * 60;
     var onFetched = function (data, settings) {
         drawTimeline({
-            header: header,
             elm: elm,
             lines: [
                 {
@@ -61,12 +116,18 @@ var createLongRequestChart = function (header) {
     return elm;
 };
 document.addEventListener('DOMContentLoaded', function () {
+    var oneMinute = 60 * 1000;
+    var oneHour = oneMinute * 60;
+    var dateEnd = new Date().getTime() - oneMinute;
+    var dateStart = dateEnd - oneMinute * 10;
     var container = document.getElementById('container-js');
-    container.appendChild(createRequestsChart(1, 'environment', 'All Requests'));
-    container.appendChild(createRequestsChart(1, 'route', 'Top route'));
-    container.appendChild(createRequestsChart(1, 'url', 'Top Url'));
-    container.appendChild(createRequestsChart(1, 'siteName', 'Top Site'));
-    container.appendChild(createLongRequestChart('Long running requests'));
+    var chart1 = new Chart(container)
+        .addHeader('Requests')
+        .addLine(dateStart, dateEnd, 'machene')
+        .fetch();
+    window.setInterval(function () {
+        chart1.fetch();
+    }, 4000);
 });
 var fetchRequests = function (request) {
     var secondsPerSample = ((request.end - request.start) / 1000) / request.samples;
@@ -118,16 +179,18 @@ var fetchRequests = function (request) {
             }
         }
     };
-    var client = new elasticsearch.Client({
-        host: 'http://elastic.laget.se/'
-    });
-    client.search({
-        index: ElasticHelper.getDateIndexNames('requests-', new Date(request.start), new Date(request.end)),
-        size: 0,
-        body: query
-    }).then(function (resp) {
-        console.log(resp.aggregations.routes.buckets);
-        request.onComplete(resp.aggregations.routes.buckets, request);
+    return new Promise(function (resolve, reject) {
+        var client = new elasticsearch.Client({
+            host: 'http://elastic.laget.se/'
+        });
+        client.search({
+            index: ElasticHelper.getDateIndexNames('requests-', new Date(request.start), new Date(request.end)),
+            size: 0,
+            body: query
+        }).then(function (resp) {
+            console.log(resp.aggregations.routes.buckets);
+            resolve(resp.aggregations.routes.buckets);
+        });
     });
 };
 var ElasticHelper = (function () {
@@ -220,6 +283,12 @@ var fetchLongRequests = function (request) {
         request.onComplete(resp.aggregations.data.buckets, request);
     });
 };
+var drawText = function (chart) {
+    chart.elm
+        .append("p")
+        .attr("class", "box__title")
+        .html(chart.text);
+};
 var drawLine = function (chart) {
     var margin = {
         top: 0,
@@ -231,15 +300,7 @@ var drawLine = function (chart) {
     var height = 200;
     var innerWidth = width - (margin.left + margin.right);
     var innerHeight = height - (margin.top + margin.bottom);
-    d3.select(chart.elm)
-        .append("p")
-        .attr("class", "box__title")
-        .html(chart.header);
-    d3.select(chart.elm)
-        .append("p")
-        .attr("class", "box__subtitle")
-        .html(chart.lines[0].data.map(function (f) { return f.key; }).join(', '));
-    var svg = d3.select(chart.elm)
+    var svg = chart.elm
         .attr("class", "box")
         .append("svg")
         .attr("width", width)
@@ -257,23 +318,36 @@ var drawLine = function (chart) {
         .attr('height', innerHeight)
         .attr("class", "debugSvgInner");
     for (var ww = 0; ww < chart.lines.length; ww++) {
-        var lineConfig = chart.lines[ww];
-        var max = d3.max(lineConfig.data, function (d) { return d3.max(d.dates.buckets, function (q) { return q.doc_count; }); });
-        var min = d3.min(lineConfig.data, function (d) { return d3.min(d.dates.buckets, function (q) { return q.doc_count; }); });
+        var line = chart.lines[ww];
+        var maxY = d3.max(line.points, function (f) { return f.y; });
+        var minY = d3.min(line.points, function (f) { return f.y; });
+        var maxX = d3.max(line.points, function (f) { return f.x; });
+        var minX = d3.min(line.points, function (f) { return f.x; });
         var x = d3.time.scale()
             .range([margin.left, innerWidth])
-            .domain([lineConfig.start, lineConfig.end]);
+            .domain([chart.start, chart.end]);
         var y = d3.scale.linear()
             .range([innerHeight, 0])
-            .domain(d3.extent([0, max]));
-        for (var i = lineConfig.data.length - 1; i >= 0; i--) {
-            var line = d3.svg.line()
-                .x(function (d) { return x(d.key); })
-                .y(function (d) { return y(d.doc_count); });
+            .domain(d3.extent([0, maxY]));
+        var color = d3.scale.linear()
+            .range(["hsl(100, 50, 50)", "hsl(150, 50, 50)"])
+            .interpolate(d3.interpolateHcl);
+        for (var i = line.points.length - 1; i >= 0; i--) {
+            var lineData = d3.svg.line()
+                .x(function (d) {
+                var q = x(d.x);
+                return q;
+            })
+                .y(function (d) {
+                return y(d.y);
+            });
+            if (chart.smooth)
+                lineData = lineData.interpolate("basis");
             svg.append("path")
-                .datum(lineConfig.data[i].dates.buckets)
+                .datum(line.points)
                 .attr("class", "line")
-                .attr("d", line);
+                .attr("stroke", function (f, i) { return color(i * 4 + 3); })
+                .attr("d", lineData);
         }
     }
 };
@@ -288,15 +362,7 @@ var drawTimeline = function (chart) {
     var height = 400;
     var innerWidth = width - (margin.left + margin.right);
     var innerHeight = height - (margin.top + margin.bottom);
-    d3.select(chart.elm)
-        .append("p")
-        .attr("class", "box__title")
-        .html(chart.header);
-    d3.select(chart.elm)
-        .append("p")
-        .attr("class", "box__subtitle")
-        .html(chart.lines[0].data.map(function (f) { return f.perRequest.buckets[0].key; }).join(', '));
-    var svg = d3.select(chart.elm)
+    var svg = chart.elm
         .attr("class", "box")
         .append("svg")
         .attr("width", width)
@@ -305,21 +371,14 @@ var drawTimeline = function (chart) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     for (var ww = 0; ww < chart.lines.length; ww++) {
         var lineConfig = chart.lines[ww];
-        var maxX = d3.max(lineConfig.data, function (d) { return d.perRequest.buckets[0].startTime.value; });
-        var minX = d3.min(lineConfig.data, function (d) { return d.perRequest.buckets[0].startTime.value; });
         var x = d3.time.scale()
             .range([margin.left, innerWidth])
             .domain([lineConfig.start, lineConfig.end]);
-        var y = d3.scale.linear()
-            .range([innerHeight, 0])
-            .domain(d3.extent([minX, maxX]));
-        for (var i = 0; i < lineConfig.data.length; i++) {
-            svg.append("rect")
-                .x(function (a, b) { return i * 10; })
-                .attr("fill", "white")
-                .attr("width", 10)
-                .attr("height", 10);
-        }
+        svg.append("rect")
+            .attr("x", function (a, b) { return i * 10; })
+            .attr("fill", "white")
+            .attr("width", 10)
+            .attr("height", 10);
     }
 };
 //# sourceMappingURL=app.js.map

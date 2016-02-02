@@ -1,36 +1,4 @@
-interface ElasticDateAggregationRequest {
-    start: number,
-    end: number,
-    selector: string,
-    samples: number,
-    groups: number,
-}
 
-interface Dataset {
-  x: number[];
-  y: number[];
-}
-
-interface NamedDataset extends Dataset {
-  name: string;
-}
-
-
-interface Timeline
-{
-  start: number;
-  end: number;
-  name: string;
-}
-
-interface TimelineChart extends Chart
-{
-  lines: Timeline[];
-}
-
-interface Chart{
-  name: string;
-}
 
 var fetchRequests = function(request: ElasticDateAggregationRequest) {
     var secondsPerSample = ((request.end - request.start) / 1000) / request.samples;
@@ -83,18 +51,19 @@ var fetchRequests = function(request: ElasticDateAggregationRequest) {
         }
     };
 
+    return new Promise(function(resolve, reject) {
+        var client = new elasticsearch.Client({
+            host: 'http://elastic.laget.se/'
+        });
 
-    var client = new elasticsearch.Client({
-        host: 'http://elastic.laget.se/'
-    });
-
-    client.search({
-        index: ElasticHelper.getDateIndexNames('requests-', new Date(request.start), new Date(request.end)),
-        size: 0,
-        body: query
-    }).then(function(resp) {
-        console.log(resp.aggregations.routes.buckets);
-        request.onComplete(resp.aggregations.routes.buckets, request);
+        client.search({
+            index: ElasticHelper.getDateIndexNames('requests-', new Date(request.start), new Date(request.end)),
+            size: 0,
+            body: query
+        }).then(function(resp) {
+            console.log(resp.aggregations.routes.buckets);
+            resolve(resp.aggregations.routes.buckets);
+        });
     });
 }
 

@@ -1,24 +1,92 @@
+class Chart {
+    elm: HTMLElement;
+    onDataFetch: any[] = [];
+
+    constructor(parent: HTMLElement){
+        this.elm = document.createElement('div');
+        parent.appendChild(this.elm);
+    }
+
+    addHeader(text: string){
+        d3.select(this.elm)
+          .append("p")
+          .attr("class", "box__title")
+          .html(text);
+
+      return this;
+    }
+
+    addLine(start, end, selector){
+     var g = d3.select(this.elm)
+               .append("g")
+               ;
+
+    this.onDataFetch.push({
+        g: g,
+        fun: g => {
+            var request = {
+                selector: selector,
+                start: start,
+                end: end,
+                samples: 100,
+                groups: 2,
+            }
+
+            fetchRequests(request).then(data => {
+                g.selectAll('*').remove();
+                drawLine({
+                    elm: g,
+                    start: start,
+                    end: end,
+                    smooth: true,
+                    width: 300,
+                    height: 200,
+                    lines: data.map(line => ({
+                        name: line.key,
+                        points: line.dates.buckets.map(x => ({
+                            x: x.key,
+                            y: x.times.value,
+                        }))
+                    }))
+                });
+            });
+
+
+        }
+    });
+
+     return this;
+    }
+
+    fetch(){
+        for (var i = 0; i < this.onDataFetch.length; i++)
+            this.onDataFetch[i].fun(this.onDataFetch[i].g);
+
+        return this;
+    }
+}
 
 
 var createRequestsChart = function(hours, selector, header){
     var elm = document.createElement('div');
-    var oneMinute = 60 * 1000; 
-    var oneHour = oneMinute * 60;
 
-    var dateEnd = new Date().getTime() - oneMinute;
-    var dateStart = dateEnd - oneHour * hours;
 
     var onFetched = (data: any, settings: ElasticDateAggregationRequest) => {
+        elm.innerHTML = '';
         drawLine({
-            header: header,
-            elm: elm,
-            lines: [
-                {
-                    start: dateStart,
-                    end: dateEnd,
-                    data: data
-                }
-            ]
+            elm: d3.select(elm).append('g'),
+            start: dateStart,
+            end: dateEnd,
+            smooth: true,
+            width: 300,
+            height: 200,
+            lines: data.map(line => ({
+                name: line.key,
+                points: line.dates.buckets.map(x => ({
+                    x: x.key,
+                    y: x.times.value,
+                }))
+            }))
         });
     }
 
@@ -26,8 +94,8 @@ var createRequestsChart = function(hours, selector, header){
         selector: selector,
         start: dateStart,
         end: dateEnd,
-        samples: 15,
-        groups: 1,
+        samples: 30,
+        groups: 3,
         onComplete: onFetched,
         xSelector: d => d,
         ySelector: d => d,
@@ -44,7 +112,6 @@ var createLongRequestChart = function(header){
 
     var onFetched = (data: any, settings: ElasticDateAggregationRequest) => {
         drawTimeline({
-            header: header,
             elm: elm,
             lines: [
                 {
@@ -71,10 +138,24 @@ var createLongRequestChart = function(header){
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    var oneMinute = 60 * 1000;
+    var oneHour = oneMinute * 60;
+
+    var dateEnd = new Date().getTime() - oneMinute;
+    var dateStart = dateEnd - oneMinute * 10;
+
     var container = document.getElementById('container-js');
-    container.appendChild(createRequestsChart(1, 'environment', 'All Requests'));
-    container.appendChild(createRequestsChart(1, 'route', 'Top route'));
-    container.appendChild(createRequestsChart(1, 'url', 'Top Url'));
-    container.appendChild(createRequestsChart(1, 'siteName', 'Top Site'));
-    container.appendChild(createLongRequestChart('Long running requests'));
+    var chart1 = new Chart(container)
+                        .addHeader('Requests')
+                        .addLine(dateStart, dateEnd, 'machene')
+                        .fetch()
+                        ;
+
+    window.setInterval(() => {
+        chart1.fetch();
+    }, 4000)
+    // container.appendChild(createRequestsChart(1, 'route', 'Top route'));
+    // container.appendChild(createRequestsChart(1, 'url', 'Top Url'));
+    // container.appendChild(createRequestsChart(1, 'siteName', 'Top Site'));
+    // container.appendChild(createLongRequestChart('Long running requests'));
 })

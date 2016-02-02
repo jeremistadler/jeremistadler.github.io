@@ -1,18 +1,12 @@
 
-
-interface LineSettings {
-  header: string;
-  elm: HTMLElement;
-  lines: LineSettingsChart[];
+var drawText = function(chart: TextChart) {
+    chart.elm
+      .append("p")
+      .attr("class", "box__title")
+      .html(chart.text);
 }
 
-interface LineSettingsChart {
-  data: any;
-  start: number;
-  end: number;
-}
-
-var drawLine = function(chart: LineSettings) {
+var drawLine = function(chart: LineChart) {
   var margin = {
     top: 0,
     right: 0,
@@ -24,18 +18,8 @@ var drawLine = function(chart: LineSettings) {
   var innerWidth = width - (margin.left + margin.right);
   var innerHeight = height - (margin.top + margin.bottom);
 
-  d3.select(chart.elm)
-    .append("p")
-    .attr("class", "box__title")
-    .html(chart.header);
 
-  d3.select(chart.elm)
-    .append("p")
-    .attr("class", "box__subtitle")
-    .html(chart.lines[0].data.map(f => f.key).join(', '));
-
-
-  var svg = d3.select(chart.elm)
+  var svg = chart.elm
     .attr("class", "box")
     .append("svg")
     .attr("width", width)
@@ -57,32 +41,45 @@ var drawLine = function(chart: LineSettings) {
     .attr("class", "debugSvgInner")
 
   for (let ww = 0; ww < chart.lines.length; ww++) {
-    var lineConfig = chart.lines[ww];
+    var line = chart.lines[ww];
 
-    var max = d3.max(lineConfig.data, (d: any) => d3.max(d.dates.buckets, (q: any) => q.doc_count));
-    var min = d3.min(lineConfig.data, (d: any) => d3.min(d.dates.buckets, (q: any) => q.doc_count));
+    var maxY = d3.max(line.points, f => f.y);
+    var minY = d3.min(line.points, f => f.y);
+    var maxX = d3.max(line.points, f => f.x);
+    var minX = d3.min(line.points, f => f.x);
 
 
     var x = d3.time.scale()
       .range([margin.left, innerWidth])
-      .domain([lineConfig.start, lineConfig.end]);
+      .domain([chart.start, chart.end]);
 
     var y = d3.scale.linear()
       .range([innerHeight, 0])
-      .domain(d3.extent([0, max]));
+      .domain(d3.extent([0, maxY]));
 
-    for (var i = lineConfig.data.length - 1; i >= 0; i--) {
-      var line = d3.svg.line()
-      //.interpolate("basis")
-        .x(function(d: any) { return x(d.key); })
-      //.y(function(d:any) { return y(d.times.value); });
-        .y(function(d: any) { return y(d.doc_count); });
+    var color = d3.scale.linear()
+    .range(["hsl(100, 50, 50)", "hsl(150, 50, 50)"])
+    .interpolate(d3.interpolateHcl);
+
+    for (var i = line.points.length - 1; i >= 0; i--) {
+      var lineData = d3.svg.line()
+        .x(function(d: any) {
+            var q = x(d.x)
+            return  q;
+         })
+        .y(function(d: any) {
+            return y(d.y);
+        });
+
+    if (chart.smooth)
+        lineData = lineData.interpolate("basis")
 
       svg.append("path")
-        .datum(lineConfig.data[i].dates.buckets)
+        .datum(line.points)
       //.attr("transform", "translate(0," + 15 + ")")
         .attr("class", "line")
-        .attr("d", line)
+        .attr("stroke", (f, i) => color(i * 4 + 3))
+        .attr("d", lineData)
     }
   }
 }
