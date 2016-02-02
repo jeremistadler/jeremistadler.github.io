@@ -1,36 +1,23 @@
 
-var drawText = function(chart: TextChart) {
-    chart.elm
-      .append("p")
-      .attr("class", "box__title")
-      .html(chart.text);
-}
 
 var drawLine = function(chart: LineChart) {
   var margin = {
     top: 0,
     right: 0,
-    bottom: 0,
-    left: 0
+    bottom: 50,
+    left: 50
   };
-  var width = 300;
-  var height = 200;
-  var innerWidth = width - (margin.left + margin.right);
-  var innerHeight = height - (margin.top + margin.bottom);
+  var innerWidth = chart.width - (margin.left + margin.right);
+  var innerHeight = chart.height - (margin.top + margin.bottom);
 
 
   var svg = chart.elm
-    .attr("class", "box")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     ;
 
   svg.append('rect')
-    .attr('width', width)
-    .attr('height', height)
+    .attr('width', chart.width)
+    .attr('height', chart.height)
     .attr('x', -margin.left)
     .attr('y', -margin.top)
     .attr("class", "debugSvg")
@@ -40,13 +27,11 @@ var drawLine = function(chart: LineChart) {
     .attr('height', innerHeight)
     .attr("class", "debugSvgInner")
 
-  for (let ww = 0; ww < chart.lines.length; ww++) {
-    var line = chart.lines[ww];
 
-    var maxY = d3.max(line.points, f => f.y);
-    var minY = d3.min(line.points, f => f.y);
-    var maxX = d3.max(line.points, f => f.x);
-    var minX = d3.min(line.points, f => f.x);
+    var maxY = d3.max(chart.lines, f => d3.max(f.points, q => q.y));
+    var minY = 0;
+    var maxX = chart.end;
+    var minX = chart.start;
 
 
     var x = d3.time.scale()
@@ -57,11 +42,42 @@ var drawLine = function(chart: LineChart) {
       .range([innerHeight, 0])
       .domain(d3.extent([0, maxY]));
 
+
+    var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left");
+
+      svg.append("g")
+           .attr("class", "x axis")
+           .attr("transform", "translate(0," + innerHeight + ")")
+           .call(xAxis);
+
+       svg.append("g")
+           .attr("class", "y axis")
+           .call(yAxis)
+         .append("text")
+           .attr("transform", "rotate(-90)")
+           .attr("y", 6)
+           .attr("dy", ".71em")
+           .attr("class", "axisText")
+           .style("text-anchor", "end")
+           .text("Price ($)");
+
     var color = d3.scale.linear()
     .range(["hsl(100, 50, 50)", "hsl(150, 50, 50)"])
     .interpolate(d3.interpolateHcl);
 
-    for (var i = line.points.length - 1; i >= 0; i--) {
+  for (let ww = 0; ww < chart.lines.length; ww++) {
+    var line = chart.lines[ww];
+
+    line.points[0].x = 0;
+    line.points[1].x = 0;
+
+    for (var i = 0; i < line.points.length; i++) {
       var lineData = d3.svg.line()
         .x(function(d: any) {
             var q = x(d.x)

@@ -51,7 +51,7 @@ html, body {
 }
 .line {
     fill: none;
-    stroke-width: 2px;
+    stroke-width: 1px;
 }
 
 .debugSvg {
@@ -63,4 +63,20 @@ html, body {
     fill: green;
     opacity: 0.1;
     opacity: 0;
+}
+
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.axisText{
+    fill: white;
 }

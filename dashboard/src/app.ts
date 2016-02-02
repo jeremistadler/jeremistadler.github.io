@@ -4,6 +4,7 @@ class Chart {
 
     constructor(parent: HTMLElement){
         this.elm = document.createElement('div');
+        this.elm.classList.add('box');
         parent.appendChild(this.elm);
     }
 
@@ -18,7 +19,9 @@ class Chart {
 
     addLine(start, end, selector){
      var g = d3.select(this.elm)
-               .append("g")
+               .append("svg")
+               .attr("width", 500)
+               .attr("height", 200)
                ;
 
     this.onDataFetch.push({
@@ -28,7 +31,7 @@ class Chart {
                 selector: selector,
                 start: start,
                 end: end,
-                samples: 100,
+                samples: 10,
                 groups: 2,
             }
 
@@ -38,8 +41,8 @@ class Chart {
                     elm: g,
                     start: start,
                     end: end,
-                    smooth: true,
-                    width: 300,
+                    smooth: false,
+                    width: 500,
                     height: 200,
                     lines: data.map(line => ({
                         name: line.key,
@@ -142,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var oneHour = oneMinute * 60;
 
     var dateEnd = new Date().getTime() - oneMinute;
-    var dateStart = dateEnd - oneMinute * 10;
+    var dateStart = dateEnd - oneMinute * 60;
 
     var container = document.getElementById('container-js');
     var chart1 = new Chart(container)
@@ -151,9 +154,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         .fetch()
                         ;
 
-    window.setInterval(() => {
-        chart1.fetch();
-    }, 4000)
+    // window.setInterval(() => {
+    //     chart1.fetch();
+    // }, 4000)
     // container.appendChild(createRequestsChart(1, 'route', 'Top route'));
     // container.appendChild(createRequestsChart(1, 'url', 'Top Url'));
     // container.appendChild(createRequestsChart(1, 'siteName', 'Top Site'));

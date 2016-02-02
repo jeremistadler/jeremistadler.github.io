@@ -2,6 +2,7 @@ var Chart = (function () {
     function Chart(parent) {
         this.onDataFetch = [];
         this.elm = document.createElement('div');
+        this.elm.classList.add('box');
         parent.appendChild(this.elm);
     }
     Chart.prototype.addHeader = function (text) {
@@ -13,7 +14,9 @@ var Chart = (function () {
     };
     Chart.prototype.addLine = function (start, end, selector) {
         var g = d3.select(this.elm)
-            .append("g");
+            .append("svg")
+            .attr("width", 500)
+            .attr("height", 200);
         this.onDataFetch.push({
             g: g,
             fun: function (g) {
@@ -21,7 +24,7 @@ var Chart = (function () {
                     selector: selector,
                     start: start,
                     end: end,
-                    samples: 100,
+                    samples: 10,
                     groups: 2,
                 };
                 fetchRequests(request).then(function (data) {
@@ -30,8 +33,8 @@ var Chart = (function () {
                         elm: g,
                         start: start,
                         end: end,
-                        smooth: true,
-                        width: 300,
+                        smooth: false,
+                        width: 500,
                         height: 200,
                         lines: data.map(function (line) { return ({
                             name: line.key,
@@ -119,15 +122,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var oneMinute = 60 * 1000;
     var oneHour = oneMinute * 60;
     var dateEnd = new Date().getTime() - oneMinute;
-    var dateStart = dateEnd - oneMinute * 10;
+    var dateStart = dateEnd - oneMinute * 60;
     var container = document.getElementById('container-js');
     var chart1 = new Chart(container)
         .addHeader('Requests')
         .addLine(dateStart, dateEnd, 'machene')
         .fetch();
-    window.setInterval(function () {
-        chart1.fetch();
-    }, 4000);
 });
 var fetchRequests = function (request) {
     var secondsPerSample = ((request.end - request.start) / 1000) / request.samples;
@@ -283,33 +283,20 @@ var fetchLongRequests = function (request) {
         request.onComplete(resp.aggregations.data.buckets, request);
     });
 };
-var drawText = function (chart) {
-    chart.elm
-        .append("p")
-        .attr("class", "box__title")
-        .html(chart.text);
-};
 var drawLine = function (chart) {
     var margin = {
         top: 0,
         right: 0,
-        bottom: 0,
-        left: 0
+        bottom: 50,
+        left: 50
     };
-    var width = 300;
-    var height = 200;
-    var innerWidth = width - (margin.left + margin.right);
-    var innerHeight = height - (margin.top + margin.bottom);
+    var innerWidth = chart.width - (margin.left + margin.right);
+    var innerHeight = chart.height - (margin.top + margin.bottom);
     var svg = chart.elm
-        .attr("class", "box")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     svg.append('rect')
-        .attr('width', width)
-        .attr('height', height)
+        .attr('width', chart.width)
+        .attr('height', chart.height)
         .attr('x', -margin.left)
         .attr('y', -margin.top)
         .attr("class", "debugSvg");
@@ -317,22 +304,44 @@ var drawLine = function (chart) {
         .attr('width', innerWidth)
         .attr('height', innerHeight)
         .attr("class", "debugSvgInner");
+    var maxY = d3.max(chart.lines, function (f) { return d3.max(f.points, function (q) { return q.y; }); });
+    var minY = 0;
+    var maxX = chart.end;
+    var minX = chart.start;
+    var x = d3.time.scale()
+        .range([margin.left, innerWidth])
+        .domain([chart.start, chart.end]);
+    var y = d3.scale.linear()
+        .range([innerHeight, 0])
+        .domain(d3.extent([0, maxY]));
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left");
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + innerHeight + ")")
+        .call(xAxis);
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .attr("class", "axisText")
+        .style("text-anchor", "end")
+        .text("Price ($)");
+    var color = d3.scale.linear()
+        .range(["hsl(100, 50, 50)", "hsl(150, 50, 50)"])
+        .interpolate(d3.interpolateHcl);
     for (var ww = 0; ww < chart.lines.length; ww++) {
         var line = chart.lines[ww];
-        var maxY = d3.max(line.points, function (f) { return f.y; });
-        var minY = d3.min(line.points, function (f) { return f.y; });
-        var maxX = d3.max(line.points, function (f) { return f.x; });
-        var minX = d3.min(line.points, function (f) { return f.x; });
-        var x = d3.time.scale()
-            .range([margin.left, innerWidth])
-            .domain([chart.start, chart.end]);
-        var y = d3.scale.linear()
-            .range([innerHeight, 0])
-            .domain(d3.extent([0, maxY]));
-        var color = d3.scale.linear()
-            .range(["hsl(100, 50, 50)", "hsl(150, 50, 50)"])
-            .interpolate(d3.interpolateHcl);
-        for (var i = line.points.length - 1; i >= 0; i--) {
+        line.points[0].x = 0;
+        line.points[1].x = 0;
+        for (var i = 0; i < line.points.length; i++) {
             var lineData = d3.svg.line()
                 .x(function (d) {
                 var q = x(d.x);
