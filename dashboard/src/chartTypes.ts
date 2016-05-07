@@ -37,7 +37,6 @@ interface NamedDataset extends Dataset {
   name: string;
 }
 
-
 interface LineChart extends Chart
 {
   start: number;

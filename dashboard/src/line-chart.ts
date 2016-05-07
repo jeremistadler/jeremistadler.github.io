@@ -1,47 +1,20 @@
 
 
 var drawLine = function(chart: LineChart) {
-  var margin = {
-    top: 0,
-    right: 0,
-    bottom: 50,
-    left: 50
-  };
-  var innerWidth = chart.width - (margin.left + margin.right);
-  var innerHeight = chart.height - (margin.top + margin.bottom);
-
-
-  var svg = chart.elm
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    ;
-
-  svg.append('rect')
-    .attr('width', chart.width)
-    .attr('height', chart.height)
-    .attr('x', -margin.left)
-    .attr('y', -margin.top)
-    .attr("class", "debugSvg")
-
-  svg.append('rect')
-    .attr('width', innerWidth)
-    .attr('height', innerHeight)
-    .attr("class", "debugSvgInner")
-
+    var svg = chart.elm;
 
     var maxY = d3.max(chart.lines, f => d3.max(f.points, q => q.y));
     var minY = 0;
     var maxX = chart.end;
     var minX = chart.start;
 
-
     var x = d3.time.scale()
-      .range([margin.left, innerWidth])
-      .domain([chart.start, chart.end]);
+      .range([0, chart.width])
+      .domain([minX, maxX]);
 
     var y = d3.scale.linear()
-      .range([innerHeight, 0])
-      .domain(d3.extent([0, maxY]));
-
+      .range([chart.height, 0]).nice()
+      .domain(d3.extent([minY, maxY]));
 
     var xAxis = d3.svg.axis()
       .scale(x)
@@ -51,25 +24,25 @@ var drawLine = function(chart: LineChart) {
       .scale(y)
       .orient("left");
 
-      svg.append("g")
-           .attr("class", "x axis")
-           .attr("transform", "translate(0," + innerHeight + ")")
-           .call(xAxis);
+    svg.append("g")
+       .attr("class", "x axis")
+       .attr("transform", "translate(0," + chart.height + ")")
+       .call(xAxis);
 
-       svg.append("g")
-           .attr("class", "y axis")
-           .call(yAxis)
-         .append("text")
-           .attr("transform", "rotate(-90)")
-           .attr("y", 6)
-           .attr("dy", ".71em")
-           .attr("class", "axisText")
-           .style("text-anchor", "end")
-           .text("Price ($)");
+    svg.append("g")
+       .attr("class", "y axis")
+       .call(yAxis)
+       .append("text")
+       .attr("transform", "rotate(-90)")
+       .attr("y", 6)
+       .attr("dy", ".71em")
+       .attr("class", "axisText")
+       .style("text-anchor", "end")
+       .text("Price ($)");
 
     var color = d3.scale.linear()
-    .range(["hsl(100, 50, 50)", "hsl(150, 50, 50)"])
-    .interpolate(d3.interpolateHcl);
+       .range(["hsl(100, 50, 50)", "hsl(150, 50, 50)"])
+       .interpolate(d3.interpolateHcl);
 
   for (let ww = 0; ww < chart.lines.length; ww++) {
     var line = chart.lines[ww];

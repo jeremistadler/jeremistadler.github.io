@@ -19,9 +19,11 @@ class Chart {
 
     addLine(start, end, selector){
      var g = d3.select(this.elm)
-               .append("svg")
-               .attr("width", 500)
-               .attr("height", 200)
+               .append('svg')
+               .attr('width', 500)
+               .attr('height', 250)
+               .append('g')
+               .attr('transform', 'translate(10,10)')
                ;
 
     this.onDataFetch.push({
@@ -42,7 +44,7 @@ class Chart {
                     start: start,
                     end: end,
                     smooth: false,
-                    width: 500,
+                    width: 400,
                     height: 200,
                     lines: data.map(line => ({
                         name: line.key,

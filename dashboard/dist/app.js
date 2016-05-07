@@ -14,9 +14,11 @@ var Chart = (function () {
     };
     Chart.prototype.addLine = function (start, end, selector) {
         var g = d3.select(this.elm)
-            .append("svg")
-            .attr("width", 500)
-            .attr("height", 200);
+            .append('svg')
+            .attr('width', 500)
+            .attr('height', 250)
+            .append('g')
+            .attr('transform', 'translate(10,10)');
         this.onDataFetch.push({
             g: g,
             fun: function (g) {
@@ -34,7 +36,7 @@ var Chart = (function () {
                         start: start,
                         end: end,
                         smooth: false,
-                        width: 500,
+                        width: 400,
                         height: 200,
                         lines: data.map(function (line) { return ({
                             name: line.key,
@@ -284,36 +286,17 @@ var fetchLongRequests = function (request) {
     });
 };
 var drawLine = function (chart) {
-    var margin = {
-        top: 0,
-        right: 0,
-        bottom: 50,
-        left: 50
-    };
-    var innerWidth = chart.width - (margin.left + margin.right);
-    var innerHeight = chart.height - (margin.top + margin.bottom);
-    var svg = chart.elm
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    svg.append('rect')
-        .attr('width', chart.width)
-        .attr('height', chart.height)
-        .attr('x', -margin.left)
-        .attr('y', -margin.top)
-        .attr("class", "debugSvg");
-    svg.append('rect')
-        .attr('width', innerWidth)
-        .attr('height', innerHeight)
-        .attr("class", "debugSvgInner");
+    var svg = chart.elm;
     var maxY = d3.max(chart.lines, function (f) { return d3.max(f.points, function (q) { return q.y; }); });
     var minY = 0;
     var maxX = chart.end;
     var minX = chart.start;
     var x = d3.time.scale()
-        .range([margin.left, innerWidth])
-        .domain([chart.start, chart.end]);
+        .range([0, chart.width])
+        .domain([minX, maxX]);
     var y = d3.scale.linear()
-        .range([innerHeight, 0])
-        .domain(d3.extent([0, maxY]));
+        .range([chart.height, 0]).nice()
+        .domain(d3.extent([minY, maxY]));
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom");
@@ -322,7 +305,7 @@ var drawLine = function (chart) {
         .orient("left");
     svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + innerHeight + ")")
+        .attr("transform", "translate(0," + chart.height + ")")
         .call(xAxis);
     svg.append("g")
         .attr("class", "y axis")
