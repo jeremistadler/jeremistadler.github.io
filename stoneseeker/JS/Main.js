@@ -38,7 +38,7 @@ function PlayNextSong()
 }
 
 
-function init() 
+function init()
 {
     mouseX = 0;
     mouseY = 0;
@@ -70,7 +70,7 @@ function init()
     canvas.onmousedown = mouseDown;
     canvas.onmouseup = mouseUp;
     canvas.onmousemove = mouseMovement;
-    
+
     Cam.Reset();
 
     theAnimation = setInterval(onUpdate, 1000 / TargetFps);
@@ -82,7 +82,7 @@ function init()
 }
 
 
-function onUpdate() 
+function onUpdate()
 {
     context.fillStyle = "rgb(21, 108, 152)";
     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -91,7 +91,7 @@ function onUpdate()
     CurrentScreen.Draw();
 }
 
-function mouseDown(event) 
+function mouseDown(event)
 {
     mouse[event.button] = 1;
 
@@ -103,7 +103,7 @@ function mouseDown(event)
         mouseRightDown = true;
 }
 
-function mouseUp(event) 
+function mouseUp(event)
 {
     mouse[event.button] = 0;
 
@@ -134,18 +134,19 @@ function mouseMovement(event)
 }
 
 
-function keyDown(key) 
+function keyDown(key)
 {
     return keyboard[key] == 1;
 }
 
-function keyPressed(event) 
+function keyPressed(event)
 {
     keyboard[event.keyCode] = 1;
+    event.preventDefault();
 }
 
-function keyReleased(event) 
+function keyReleased(event)
 {
     keyboard[event.keyCode] = 0;
+    event.preventDefault();
 }
-
