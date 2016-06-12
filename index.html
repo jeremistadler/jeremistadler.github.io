@@ -13,6 +13,7 @@
             font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande", "Segoe UI";
             margin: 0;
             padding: 0;
+            color: #555;
         }
 
         html, body {
@@ -102,6 +103,10 @@
       <p>
         Unicycle rider, soon to be married,  Currently working at laget.se as a web developer.
       </p>
+
+      <p style="margin: 10px 0; ">
+        Contact me by at <a style="text-decoration: none; color: #000" id="email"></a>
+      </p>
     </div>
 
 
@@ -163,5 +168,15 @@
     <div class="center__container">
       <h1 style="font-size: 13px; text-align: center; color: #929292; margin-top: 50px;margin-bottom: 30px;font-weight: 300; ">Jeremi Stadler ©</h1>
     </div>
+
+    <script>
+      var el = document.getElementById("email");
+      var addr = 'stadler.jeremi';
+      addr = addr + '@' + 'gmail.com';
+      el.href = 'mailto:' + addr;
+      el.innerText = addr;
+    </script>
+
+
 </body>
 </html>
