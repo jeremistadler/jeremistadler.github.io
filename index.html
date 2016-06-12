@@ -1,93 +1,167 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Jeremi Stadler</title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Portfolio of Jeremi Stadler, web designer, app developer &amp; ">
 
-    <link href='http://fonts.googleapis.com/css?family=Sintony' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+    <style>
+        html, body, p, h1, h2 {
+            font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande", "Segoe UI";
+            margin: 0;
+            padding: 0;
+        }
 
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        html, body {
+            background: #fafafa;
+        }
+
+        #header {
+            width: 100%;
+            min-height: 800px;
+            background-image: url(bg2.jpg);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            overflow: hidden;
+        }
+
+        #header__name {
+            font-size: 88px;
+            color: #4a4a4a;
+            margin-left: 33px;
+            margin-top: 17px;
+            margin-bottom: 0;
+        }
+
+        #header__title {
+            font-size: 20px;
+            color: #4a4a4a;
+            margin-left: 33px;
+            margin-top: 23px;
+        }
+
+
+        .center__container {
+            width: 940px;
+            overflow: hidden;
+            margin: auto;
+            margin-bottom: 50px;
+        }
+
+        .project:nth-child(odd) { float: left; }
+        .project:nth-child(even) { float: right; }
+
+
+        .project {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            width: 460px;
+            overflow: hidden;
+        }
+
+        .project__name{
+          margin: 4px 0px;
+          color: #383838;
+          font-size: 30px;
+        }
+
+        .project__description{
+          margin: 0px 0px;
+          color: #505050;
+          font-size: 12px;
+          font-weight: 300;
+        }
+
+        .project__image{
+          margin: 10px 0px;
+          width: 460px;
+          height: 200px;
+          transition: 0.1s;
+        }
+
+        .project__image:hover {
+            opacity: 0.8;
+        }
+
+    </style>
 </head>
+
 <body>
-    <!--<header id="Header">
-        <div id="InnerHeader">
-            <div id="HeaderTitle"></div>
+    <div id="header">
+        <h1 id="header__name">Jeremi <br> Stadler</h1>
+        <h1 id="header__title">Web &amp; App developer</h1>
+    </div>
+
+    <div class="center__container">
+      <h1 style="font-size: 38px; color: #353535; margin-top: 50px; margin-bottom: 20px ">Me</h1>
+
+      <p>
+        Unicycle rider, soon to be married,  Currently working at laget.se as a web developer.
+      </p>
+    </div>
+
+
+    <div class="center__container">
+        <h1 style="font-size: 38px; color: #353535; margin-top: 50px; ">Past Projects</h1>
+        <h1 style="font-size: 14px; color: #484848; margin-top: 9px; font-weight: 300;">...that I managed to share</h1>
+
+        <div class="project">
+            <div class="project__header">
+              <p class="project__name">Pliq</p>
+              <p class="project__description">Web tool for creating school lessons</p>
+            </div>
+            <a href="http://pliq.se/">
+              <img class="project__image" src="pliq.png" />
+            </a>
         </div>
-    </header>
 
-    <div id="headImageWrapper">
-        <img id="headImage" src="lake.jpg" style="width: 100%; border: none; margin: 0px;" />
-    </div>
--->
-    <div id="ContentWrapper">
-        <br />
-        <br />
-        <br />
-        <p style="font-size: 50px; font-weight: 900; color: #1a1a1a">Jeremi Stadler</p>
-        <p style="font-size: 20px; font-weight: 400; color: #535353;">Programmer | Web Developer | Designer</p>
-        <br />
-        <br />
-        <hr />
+        <div class="project">
+            <div class="project__header">
+              <p class="project__name">Info Media</p>
+              <p class="project__description">Portfolios for gymnasium students</p>
+            </div>
+            <a href="http://infomedia.orebro.se/">
+              <img class="project__image" src="infomedia.png" />
+            </a>
+        </div>
 
-        <a class="Project Left" href="http://pliq.se/">
-            <p>Pliq</p>
-            <img src="pliq.png" />
-        </a>
+        <div class="project">
+            <div class="project__header">
+              <p class="project__name">The Stoneseeker</p>
+              <p class="project__description">Small game I made</p>
+            </div>
+            <a href="http://jeremi.se/stoneseeker/">
+              <img class="project__image" src="stoneseeker.png" />
+            </a>
+        </div>
 
+        <div class="project">
+            <div class="project__header">
+              <p class="project__name">Gravity Grid</p>
+              <p class="project__description">Even smaller game I made while not listening to my gymnasium teacher</p>
+            </div>
+            <a href="http://jeremi.se/Dots/">
+              <img class="project__image" src="grid.png" />
+            </a>
+        </div>
 
-        <a class="Project Right" href="http://infomedia.orebro.se/">
-            <p>Info Media</p>
-            <img src="infomedia.png" />
-        </a>
-
-        <a class="Project Right" href="http://jeremi.se/stoneseeker/">
-            <p>The Stoneseeker</p>
-            <img src="stoneseeker.png" />
-        </a>
-
-        <a class="Project Left" href="http://pliq.se/Admin/Perf">
-            <p>Realtime</p>
-            <img src="graph.png" />
-        </a>
-
-        <a class="Project Right" href="http://jeremi.se/Dots/">
-            <p>Dot Grid</p>
-            <img src="grid.png" />
-        </a>
-
-        <a class="Project Left" href="http://jeremi.se/Spline/">
-            <p>Math Graph</p>
-            <img src="Spline.png" />
-        </a>
-
-
-
+        <div class="project">
+            <div class="project__header">
+              <p class="project__name">Math function graph</p>
+              <p class="project__description">Tool to vizualize math functions</p>
+            </div>
+            <a href="http://jeremi.se/Spline/">
+              <img class="project__image" src="Spline.png" />
+            </a>
+        </div>
     </div>
 
-    <div id="FooterWrapper">
-         Jeremi Stadler ©
+    <div class="center__container">
+      <h1 style="font-size: 13px; text-align: center; color: #929292; margin-top: 50px;margin-bottom: 30px;font-weight: 300; ">Jeremi Stadler ©</h1>
     </div>
-    
-    <iframe width=0 height=0 frameBorder="0" name="hidden_frame"></iframe>
-    <form action="http://www.laget.se/Common/UserMenu/FollowSite" target="hidden_frame" method="POST" name="followForm" onload="document.followForm.submit()">
-        <input type="hidden" value="77110" name="siteId">
-        <input type="hidden" value="true" name="follow">
-    </form>
-
-    <script>
-        $(function ()
-        {
-            $(window).scroll(function ()
-            {
-                $("#headImage").css('top', -($(this).scrollTop() / 2));
-            });
-        });
-    </script>
-
 </body>
 </html>
