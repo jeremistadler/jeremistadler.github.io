@@ -20,18 +20,7 @@ var height = canvas.height = canvas.parentElement.clientHeight;
 window.addEventListener('resize', function(){
   width = canvas.width = canvas.parentElement.clientWidth;
   height = canvas.height = canvas.parentElement.clientHeight;
-
-})
-
-function CalculateSize(item) {
-    if (item.IsFile) return Math.min(2, item.Size * 0.3);
-
-    var size = 0;
-    for (var i = 0; i < item.Children.length; i++)
-        size += CalculateSize(item.Children[i]);
-
-    return size;
-}
+});
 
 function AddBlobs(text) {
     var lines = text.split("\n");
@@ -39,38 +28,35 @@ function AddBlobs(text) {
     for (var i = 0; i < lines.length; i++)
         if (lines[i].length > 5)
             AddBlob(lines[i]);
+
+    Blobs[0].CalculateSize();
 }
 
 function AddBlob(text) {
     var start = text.indexOf(" ");
-    var size = -1;
+    if (start === -1) return;
 
-    if (start > 0)
-        size = parseInt(text.substring(0, start));
+    var sizeString = text.substring(0, start);
+    if (isNaN(sizeString)) return;
 
-    if (!(isFinite(size)))
-        return;
-
-
+    var size = parseInt(sizeString);
     var parts = text.substring(start + 1, text.length).split('\\');
     var blob = Blobs[0];
 
     for (var i = 0; i < parts.length; i++) {
         var nextBlob = blob.GetChild(parts[i]);
 
-        if (nextBlob == null) {
-            nextBlob = new Circle(blob);
-            nextBlob.Name = parts[i];
+        if (nextBlob === null) {
+            nextBlob = new Circle(blob, size / 100000, parts[i], getColorFromFilename(parts[i]));
             blob.Children.push(nextBlob);
             Blobs.push(nextBlob);
-            nextBlob.IsFile = i == parts.length - 1;
-            nextBlob.Size = (size / 100000);
-            blob.Size = CalculateSize(blob);
         }
 
         blob = nextBlob;
     }
 }
+
+Blobs.push(new Circle(null, 5, 'C:/'));
 
 function draw(){
   window.requestAnimationFrame(draw);
@@ -105,47 +91,38 @@ function draw(){
 
 
   ctx.lineWidth = 1;
-
-
-
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+  ctx.beginPath();
   for (var i = 0; i < Blobs.length; i++) {
-      ctx.strokeStyle = 'hsla(' + ((Blobs[i].Children.length * 10 + 90) % 360) + ', 100%, 50%, 0.8)';
-      if (Blobs[i].Parent != null) {
-          ctx.beginPath();
+      if (Blobs[i].Parent !== null) {
           ctx.moveTo(Blobs[i].X, Blobs[i].Y);
           ctx.lineTo(Blobs[i].Parent.X, Blobs[i].Parent.Y);
-          ctx.stroke();
       }
   }
+  ctx.stroke();
 
-
-  ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
   for (var i = 0; i < Blobs.length; i++) {
-      ctx.fillStyle = 'hsla(' + ((Blobs[i].Children.length * 10 + 90) % 360) + ', 100%, 50%, 0.8)';
-      ctx.beginPath();
-
-      ctx.arc(Blobs[i].X, Blobs[i].Y, Blobs[i].Size, 0, 2 * Math.PI, false);
-
-      ctx.fill();
-      //ctx.stroke();
+    var blob = Blobs[i];
+    ctx.fillStyle = blob.Color;
+    ctx.beginPath();
+    ctx.arc(blob.X, blob.Y, blob.Size, 0, 2 * Math.PI, false);
+    ctx.fill();
   }
 
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 draw();
 
-
-Blobs.push(new Circle(null));
-Blobs[0].Name = "C:";
-Blobs[0].Size = CalculateSize(Blobs[0]);
-
-window.setInterval(function(){
+var addTimer = window.setInterval(function(){
   var client = new XMLHttpRequest();
   client.open('GET', 'o' + FileIdToAdd + '.txt');
   FileIdToAdd++;
   client.onreadystatechange = function() {
-      if (client.readyState === 4 && client.status === 200)
+      if (client.readyState === 4) {
+        if (client.status === 200)
           AddBlobs(client.responseText);
+        else if (client.status === 404)
+          window.clearInterval(addTimer);
+      }
   }
   client.send();
 }, 1000)
@@ -155,10 +132,6 @@ document.addEventListener('mousewheel', function(e) {
     scrollY += e.wheelDeltaY;
     e.returnValue = false;
 })
-
-document.addEventListener('zoom', function(e) {
-    console.log(e);
-});
 
 function CalculateDeltaForces(items) {
     for (var i = 0; i < items.length; i++) {
@@ -261,33 +234,43 @@ function CalculateDeltaPulls(items) {
     }
 }
 
-function Circle(parent) {
+function Circle(parent, size, name, color) {
     this.Parent = parent;
     this.Children = [];
 
     this.X = 0;
     this.Y = 0;
 
-    this.Name = "";
-    this.IsFile = false;
+    this.NextDeltaX = 0.0;
+    this.NextDeltaY = 0.0;
 
-    if (parent != null) {
+    this.Name = name;
+    this.Size = size;
+    this.Color = color;
+
+    if (parent !== null) {
         var angle = Math.random() * Math.PI * 2;
         this.X = Math.cos(angle) * 40 + parent.X;
         this.Y = Math.sin(angle) * 40 + parent.Y;
     }
 
-    this.Size = 10
-
-    this.NextDeltaX = 0.0;
-    this.NextDeltaY = 0.0;
-
     this.GetChild = function(name) {
         for (var i = 0; i < this.Children.length; i++)
-            if (this.Children[i].Name == name)
+            if (this.Children[i].Name === name)
                 return this.Children[i];
 
         return null;
+    }
+
+    this.CalculateSize = function() {
+        if (this.Children.length === 0) return Math.min(2, this.Size * 0.3);
+
+        var size = 0;
+        for (var i = 0; i < this.Children.length; i++)
+            size += this.Children[i].CalculateSize();
+
+        this.Size = size;
+        return size;
     }
 }
 
@@ -295,6 +278,25 @@ function rgba(r, g, b, a) {
   return "rgba(" + r + "," + g + "," + b + "," + a + ")";
 }
 
+function hsla(r, g, b, a) {
+  return "hsla(" + r + "," + g + "%," + b + "%," + a + ")";
+}
+
 function clamp(value, min, max){
- return Math.min(Math.max(value, min), max)
+ return Math.min(Math.max(value, min), max);
+}
+
+function getFileExt(filename){
+  var i = filename.indexOf('.');
+  if (i === -1) return '';
+  return filename.substring(i + 1);
+}
+
+var colorMap = {};
+function getColorFromFilename(filename){
+  var ex = filename;
+  if (!colorMap[ex])
+    colorMap[ex] = hsla(Math.random() * 259, 40, 40, 0.7);
+
+  return colorMap[ex];
 }
