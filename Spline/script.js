@@ -192,7 +192,7 @@ function DrawGrid()
 
 			var alpha = (spacing / 100);
 			if (alpha < 0) continue;
-			if (alpha > 0.4) alpha = 0.4;
+			if (alpha > 0.2) alpha = 0.2;
 
 			context2D.strokeStyle = 'rgba(0, 0, 0, ' + alpha + ')';
 			context2D.stroke();
