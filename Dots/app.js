@@ -1,125 +1,96 @@
 
-var mousePos = new Vector2();
-var screenCenter = new Vector2();
+'use strict'
+var mousePosX = 0;
+var mousePosY = 0;
 
 
-function start()
-{
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d', { opaque: true });
 
-    totalWidth = canvas.width;
-    totalHeight = canvas.height;
+var totalWidth = canvas.width = canvas.parentElement.clientWidth;
+var totalHeight = canvas.height = canvas.parentElement.clientHeight;
 
-    screenCenter.X = totalWidth / 2;
-    screenCenter.Y = totalHeight / 2;
+mousePosX = totalWidth / 2;
+mousePosY = totalHeight / 2;
 
-    pointList = [];
+window.addEventListener('resize', function(){
+  totalWidth = canvas.width = canvas.parentElement.clientWidth;
+  totalHeight = canvas.height = canvas.parentElement.clientHeight;
 
-    var size = 20;
-    var spacing = 10;
+}, false);
 
-    var startX = (totalWidth / 2) - (size * 0.5 * spacing);
-    var startY = (totalHeight / 2) - (size * 0.5 * spacing);
+window.addEventListener('mousemove', function(ev){
+  mousePosX = ev.clientX;
+  mousePosY = ev.clientY;
+}, false);
 
-    var endX = (totalWidth / 2) + (size * 0.5 * spacing);
-    var endY = (totalHeight / 2) + (size * 0.5 * spacing);
+canvas.addEventListener('mousedown', function(ev){
+  mousePosX = ev.clientX;
+  mousePosY = ev.clientY;
+}, false);
 
-    for (var x = startX; x < endX; x += spacing)
-        for (var y = startY; y < endY; y += spacing)
-            pointList.push(new Star(x, y));
+canvas.addEventListener('mousedown', function(ev){
+  mousePosX = ev.clientX;
+  mousePosY = ev.clientY;
+}, false);
+
+canvas.addEventListener('touchstart', function(ev){
+  for (var i = 0; i < ev.changedTouches.length; i++) {
+    mousePosX = ev.changedTouches[i].pageX;
+    mousePosY = ev.changedTouches[i].pageY;
+  }
+}, false);
+
+canvas.addEventListener('touchmove', function(ev){
+  for (var i = 0; i < ev.changedTouches.length; i++) {
+    mousePosX = ev.changedTouches[i].pageX;
+    mousePosY = ev.changedTouches[i].pageY;
+  }
+}, false);
+
+
+var pointList = [];
+
+var size = 50;
+var spacing = 8;
+
+var startX = (totalWidth / 2) - (size * 0.5 * spacing);
+var startY = (totalHeight / 2) - (size * 0.5 * spacing);
+
+var endX = (totalWidth / 2) + (size * 0.5 * spacing);
+var endY = (totalHeight / 2) + (size * 0.5 * spacing);
+
+for (var x = 0; x < size; x++)
+    for (var y = 0; y < size; y++)
+        pointList.push({
+          x: x * spacing + startX,
+          y: y * spacing + startY,
+          velX: 0,
+          velY: 0,
+        });
+
+function draw(){
+  window.requestAnimationFrame(draw);
+
+  ctx.fillStyle = '#333';
+  ctx.fillRect(0, 0, totalWidth, totalHeight);
+
+  for (var i = 0; i < pointList.length; i++){
+    var star = pointList[i];
+    var xdiff = Math.abs(star.x);
+    var ydiff = Math.abs(star.y);
+
+    var distance = Math.sqrt(xdiff * xdiff + ydiff * ydiff);
+
+    star.velX += (-(star.x - mousePosX) / distance);
+    star.velY += (-(star.y - mousePosY) / distance);
+
+    star.x += star.velX * 0.4;
+    star.y += star.velY * 0.4;
+
+    var hue = (distance * 0.4) % 360;
+    ctx.fillStyle = "hsl(" + hue + ",100%, 70%)";
+    ctx.fillRect(star.x, star.y, 2, 2);
+  }
 }
-
-function ScoresDownloaded(scoreText)
-{
-    alert(scoreText);
-}
-
-
-function Star(posX, posY)
-{
-    this.Pos = new Vector2();
-    this.Velocity = new Vector2();
-
-    this.Pos.X = posX;
-    this.Pos.Y = posY;
-
-    this.Size = 1.0;
-
-    this.UpdateAndDraw = function ()
-    {
-        var distance = screenCenter.LenghtBetween(new Vector2(), this.Pos);
-
-        this.Velocity.X += (-(this.Pos.X - mouseX) / distance);
-        this.Velocity.Y += (-(this.Pos.Y - mouseY) / distance);
-
-        this.Pos.X += this.Velocity.X * 0.4;
-        this.Pos.Y += this.Velocity.Y * 0.4;
-
-
-        this.hue = (distance * 0.4) % 360;
-        circle(this.Pos.X, this.Pos.Y, 1, "hsl(" + this.hue + ",100%, 70%)");
-    }
-
-
-}
-
-function Vector2()
-{
-    this.X = 0.0;
-    this.Y = 0.0;
-
-    this.Substract = function(other)
-    {
-        this.X -= other.X;
-        this.Y -= other.Y;
-    }
-
-    this.Add = function(other)
-    {
-        this.X += other.X;
-        this.Y += other.Y;
-    }
-
-    this.Lenght = function()
-    {
-        xdiff = Math.abs(this.X);
-        ydiff = Math.abs(this.Y);
-
-        return Math.sqrt(xdiff * xdiff + ydiff * ydiff);
-    }
-
-    this.LenghtBetween = function (vec1, vec2)
-    {
-        xdiff = Math.abs(vec1.X - vec2.X);
-        ydiff = Math.abs(vec1.Y - vec2.Y);
-
-        return Math.sqrt(xdiff * xdiff + ydiff * ydiff);
-    }
-}
-
-
-function update()
-{
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    totalWidth = canvas.width;
-    totalHeight = canvas.height;
-
-    screenCenter.X = totalWidth / 2;
-    screenCenter.Y = totalHeight / 2;
-
-
-    if (keyDown(87))
-        start();
-
-    mousePos.X = mouseX;
-    mousePos.Y = mouseY;
-
-    for (var i = 0; i < pointList.length; i++)
-    {
-        pointList[i].UpdateAndDraw();
-    }
-
-}
+draw();
