@@ -62,7 +62,7 @@ function renderItem(item) {
   return `
     <div class="item">
       <p>${item.name}</p>
-      <p>${item.manufacturer}</p>
+      <p>${item.manufacturer || '-'}</p>
       <p>${item.price}</p>
       <p>${item.comparePrice} / ${item.comparePriceUnit}</p>
       <p>${item.outOfStock ? 'slut' : 'finns i lager'}</p>
