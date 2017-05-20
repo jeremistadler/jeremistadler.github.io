@@ -38,6 +38,26 @@
         margin: 16px;
         padding: 16px;
       }
+
+      .label-new {
+        color: #383838;
+      }
+
+      .label-increased {
+        color: #dc4d4d;
+      }
+
+      .label-decreased {
+        color: #30a730;
+      }
+
+      .label-changed {
+        color: #333;
+      }
+
+      .label-unchanged {
+        color: transparent;
+      }
     </style>
   </head>
   <body>
@@ -53,20 +73,42 @@ function formatDate(date) {
 function renderGroup(group) {
   return `
     <div class="group">
-      ${group.map(renderItem).join('')}
+      ${group.map((item, i) => renderItem(item, group[i - 1])).join('')}
     </div>
   `;
 }
 
-function renderItem(item) {
+const getChangedClass = (oldItem, newItem) => (key, format) => {
+  if (!oldItem) return 'label-new';
+  const newValue = newItem[key];
+  const oldValue = oldItem[key];
+
+  const parse = a => {
+    if (typeof a === 'number') return a;
+    if (typeof a === 'string') return parseFloat(a.replace('kr', '').replace(',', '.').replace(' ', ''));
+    return NaN;
+  };
+  const parsedNew = parse(newValue);
+  const parsedOld = parse(oldValue);
+
+  if (!isNaN(parsedOld) && !isNaN(parsedNew)) {
+    if (parsedNew > parsedOld) return 'label-increased';
+    if (parsedNew < parsedOld) return 'label-decreased';
+  }
+
+  return newValue === oldValue ? 'label-unchanged' : 'label-changed';
+};
+
+function renderItem(item, lastItem) {
+  const getItemLabelClass = getChangedClass(lastItem, item);
   return `
     <div class="item">
-      <p>${item.name}</p>
-      <p>${item.manufacturer || '-'}</p>
-      <p>${item.price}</p>
-      <p>${item.comparePrice} / ${item.comparePriceUnit}</p>
-      <p>${item.outOfStock ? 'slut' : 'finns i lager'}</p>
-      <p>${formatDate(item.Timestamp)}</p>
+      <p class="${getItemLabelClass('name')}">${item.name}</p>
+      <p class="${getItemLabelClass('manufacturer')}">${item.manufacturer || '-'}</p>
+      <p class="${getItemLabelClass('price')}">${item.price}</p>
+      <p class="${getItemLabelClass('comparePrice')}">${item.comparePrice} / ${item.comparePriceUnit}</p>
+      <p class="${getItemLabelClass('outOfStock')}">${item.outOfStock ? 'slut' : 'finns i lager'}</p>
+      <p class="${getItemLabelClass('Timestamp')}">${formatDate(item.Timestamp)}</p>
     </div>
   `;
 }
@@ -74,6 +116,7 @@ function renderItem(item) {
 fetch('https://statify-functions.azurewebsites.net/api/fetch-store-changes')
 .then(r => r.json())
 .then(groups => {
+  groups = groups.filter(f => f.length > 1);
   groups.forEach(group => {
     group.sort((a, b) => new Date(a.Timestamp) - new Date(b.Timestamp));
   });
